@@ -41,7 +41,8 @@ implementation
 uses
   uFrame_MapSelection,
   Ian.Styling.Buttons,
-  uFrame_Options; // move options UI into its own frame
+  uFrame_Options, // move options UI into its own frame
+  UniPas.Routing; // Use TUniPas for navigation/creation of frames
 
 {$R *.fmx}
 
@@ -51,46 +52,13 @@ begin
 end;
 
 procedure TFrame_MainMenu.btnOptionsClick(Sender: TObject);
-var
-  Frm: TFrame_Options;
-  i: Integer;
-  existing: TFrame_Options;
 begin
-  // If an Options frame already exists as a component owned by this frame, reuse it
-  existing := nil;
-  for i := 0 to ComponentCount - 1 do
-    if Components[i] is TFrame_Options then
-    begin
-      existing := TFrame_Options(Components[i]);
-      Break;
-    end;
-  if Assigned(existing) then
-  begin
-    existing.ShowOn(Self);
-    Exit;
-  end;
-
-  // Create the options frame and show it on this frame's parent (non-blocking)
-  Frm := TFrame_Options.Create(nil);
-  try
-    Frm.ShowOn(Self);
-  except
-    Frm.Free;
-    raise;
-  end;
+  TUniPas.RenderPage('Options');
 end;
 
 procedure TFrame_MainMenu.btnPlayGameClick(Sender: TObject);
-var
-  Frm: TFrame_MapSelection;
 begin
-  Frm := TFrame_MapSelection.Create(nil);
-  try
-    Frm.ShowOn(Self);
-  except
-    Frm.Free;
-    raise;
-  end;
+  TUniPas.RenderPage('MapSelection');
 end;
 
 procedure TFrame_MainMenu.Loaded;

@@ -37,7 +37,7 @@ implementation
 
 uses
   System.Math,
-  uFrame_MapSelection; // for returning to selection
+  UniPas.Routing; // use routing to show map selection
 
 {$R *.fmx}
 
@@ -47,34 +47,8 @@ begin
 end;
 
 procedure TFrame_Map1.btnCancelClick(Sender: TObject);
-var
-  parentCtrl: TFmxObject;
-  sel: TFrame_MapSelection;
 begin
-  parentCtrl := Parent;
-  // Detach from parent so the visual tree no longer references this frame
-  Parent := nil;
-
-  // Create and show the selection frame before freeing this frame
-  if parentCtrl is TControl then
-  begin
-    sel := TFrame_MapSelection.Create(nil);
-    try
-      sel.Parent := TControl(parentCtrl);
-      sel.ShowOn(TControl(parentCtrl));
-    except
-      sel.Free;
-      raise;
-    end;
-  end;
-
-  // Queue freeing this frame to occur after the event returns to avoid
-  // freeing self while still executing code on its stack.
-  TThread.Queue(nil,
-    procedure
-    begin
-      Free;
-    end);
+  TUniPas.RenderPage('MapSelection');
 end;
 
 procedure TFrame_Map1.Loaded;
@@ -88,9 +62,6 @@ begin
     // We'll size/position the image manually to achieve a "cover" effect
     Image1.Align := TAlignLayout.None;
   end;
-
-  if Assigned(btnCancel) then
-    btnCancel.OnClick := btnCancelClick;
 
   UpdateImageCover;
 end;

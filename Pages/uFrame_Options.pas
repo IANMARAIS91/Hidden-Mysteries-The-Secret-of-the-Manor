@@ -22,8 +22,7 @@ uses
 
   System.IOutils,
 
-  Ian.Styling.Buttons,
-  Ian.Config; // new
+  Ian.Config, FMX.Effects, FMX.Filter.Effects; // new
 
 type
   TFrame_Options = class(TFrame)
@@ -44,37 +43,32 @@ type
     Layout1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;
+    imgBackground: TImage;
+    GloomEffect1: TGloomEffect;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
   private
     // fields first (Delphi expects fields before any subsequent method/property declarations to avoid E2169 in some compiler versions)
     FPendingFullscreen: Boolean; // store the user's pending fullscreen choice until Save
-    procedure CancelClick(Sender: TObject);
-    procedure SaveClick(Sender: TObject);
     procedure LoadOptionsFromIni; // new
     procedure SwitchFullscreenChanged(Sender: TObject); // handle toggles without applying immediately
   protected
     procedure Loaded; override;
   public
     procedure ShowOn(AParent: TControl);
-    procedure HideOverlay;
   end;
 
 implementation
 
+uses
+  Ian.Styling.Buttons,
+  UniPas.Routing;
+
 {$R *.fmx}
 
-procedure TFrame_Options.CancelClick(Sender: TObject);
+procedure TFrame_Options.btnCancelClick(Sender: TObject);
 begin
-  HideOverlay;
-end;
-
-procedure TFrame_Options.HideOverlay;
-begin
-  // Remove and free the frame (caller expects the overlay/dialog to go away)
-  if Assigned(Self.Parent) then
-  begin
-    Self.Parent := nil;
-    Free;
-  end;
+  TUniPas.RenderPage('MainMenu');
 end;
 
 procedure TFrame_Options.LoadOptionsFromIni;
@@ -93,7 +87,14 @@ begin
   end;
 end;
 
-procedure TFrame_Options.SaveClick(Sender: TObject);
+procedure TFrame_Options.SwitchFullscreenChanged(Sender: TObject);
+begin
+  // Only update the pending value; do not change the application's fullscreen state until Save
+  if Assigned(SwitchFullscreen) then
+    FPendingFullscreen := SwitchFullscreen.IsChecked;
+end;
+
+procedure TFrame_Options.btnSaveClick(Sender: TObject);
 var
   cfg: TGameConfig;
 begin
@@ -169,25 +170,12 @@ begin
     end;
   end;
 
-  HideOverlay;
-end;
-
-procedure TFrame_Options.SwitchFullscreenChanged(Sender: TObject);
-begin
-  // Only update the pending value; do not change the application's fullscreen state until Save
-  if Assigned(SwitchFullscreen) then
-    FPendingFullscreen := SwitchFullscreen.IsChecked;
+  TUniPas.RenderPage('MainMenu');
 end;
 
 procedure TFrame_Options.Loaded;
 begin
   inherited Loaded;
-
-  // Wire events and defaults for design-time components
-  if Assigned(btnCancel) then
-    btnCancel.OnClick := CancelClick;
-  if Assigned(btnSave) then
-    btnSave.OnClick := SaveClick;
 
   if Assigned(btnSave) and Assigned(lblSave) then
     ApplyButtonStyle(btnSave, lblSave, True);
@@ -219,8 +207,6 @@ begin
   Self.Visible := True;
   if Assigned(Dialog) then
   begin
-    Dialog.Position.X := (Self.Width - Dialog.Width) / 2;
-    Dialog.Position.Y := (Self.Height - Dialog.Height) / 2;
     Dialog.BringToFront;
   end;
 end;

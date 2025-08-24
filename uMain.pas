@@ -6,8 +6,6 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation,
   FMX.StdCtrls, FMX.Objects, FMX.Ani, FMX.Layouts, System.Net.HttpClient, System.Math, FMX.Dialogs, FMX.Effects,
-  uFrame_MainMenu,
-
   uConfig,
   UniPas.Routing.Variables,
   UniPas.Routing;
@@ -19,7 +17,6 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
-    FMenuFrame: TFrame_MainMenu;
   public
     { Public declarations }
   end;
@@ -80,13 +77,8 @@ var
   cfg: TGameConfig;
 begin
   UniPas.Routing.Variables.UniPasContainerControl := TObject(UniPasContainer);
-  UniPasPageName := 'Home';
+  UniPasPageName := 'MainMenu';
   TUniPas.RenderPage(UniPasPageName);
-
-  // Create and align the main menu frame to fill the form
-  FMenuFrame := TFrame_MainMenu.Create(Self);
-  FMenuFrame.Parent := Self;
-  FMenuFrame.Align := TAlignLayout.Client;
 
   // Load config and apply fullscreen/windowed mode at startup
   LoadConfig(cfg);

@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation;
+  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.Effects,
+  FMX.Filter.Effects;
 
 type
   TFrame_MapSelection = class(TFrame)
@@ -21,15 +22,17 @@ type
     lblSelectMap5: TLabel;
     SelectMap6: TRectangle;
     lblSelectMap6: TLabel;
+    imgBackground: TImage;
+    GloomEffect1: TGloomEffect;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnSelectClick(Sender: TObject);
   private
     // Selection state and helpers
     FSelectedIdx: Integer;
     FSelectedTile: TRectangle;
     procedure TileClick(Sender: TObject);
-    procedure CancelClick(Sender: TObject);
     procedure SelectTile(ATile: TRectangle);
     procedure ApplyTileStyle(ATile: TRectangle; const ASelected: Boolean);
-    procedure SelectClick(Sender: TObject);
   protected
     procedure Loaded; override;
   published
@@ -53,28 +56,39 @@ implementation
 
 uses
   Ian.Styling.Buttons,
-  uFrame_Map1, uFrame_Map2, uFrame_Map3, uFrame_Map4, uFrame_Map5, uFrame_Map6,
+  UniPas.Routing, // delegate creation/navigation
   popSelectMap; // added System.Classes for TThread
 
 {$R *.fmx}
 
 { TFrame_MapSelection }
 
-procedure TFrame_MapSelection.CancelClick(Sender: TObject);
-var
-  LSelf: TFrame_MapSelection;
+procedure TFrame_MapSelection.btnCancelClick(Sender: TObject);
 begin
-  // Safely remove from parent and defer Free until after the event returns to avoid
-  // use-after-free issues in the caller's call stack.
-  if Assigned(Self.Parent) then
-    Self.Parent := nil;
-  LSelf := Self;
-  TThread.Queue(nil,
-    procedure
+  TUniPas.RenderPage('MainMenu');
+end;
+
+procedure TFrame_MapSelection.btnSelectClick(Sender: TObject);
+var
+  Popup: TpopupSelectMap;
+begin
+  // Ensure a map is selected
+  if FSelectedIdx < 0 then
+  begin
+    // Show custom popup instead of generic message
+    if Assigned(Parent) and (Parent is TControl) then
     begin
-      if not Application.Terminated and Assigned(LSelf) then
-        LSelf.Free;
-    end);
+      Popup := TpopupSelectMap.Create(nil);
+      Popup.ShowOn(TControl(Parent));
+    end
+    else
+      ShowMessage('Please select a map first.');
+    Exit;
+  end;
+
+  // Delegate creation of the map frame to TUniPas so routing and lifecycle
+  // are centralized. Page names are Map1..Map6.
+  TUniPas.RenderPage('Map' + IntToStr(FSelectedIdx + 1));
 end;
 
 procedure TFrame_MapSelection.TileClick(Sender: TObject);
@@ -133,11 +147,6 @@ begin
   if Assigned(lblSelectMap5) then lblSelectMap5.HitTest := False;
   if Assigned(lblSelectMap6) then lblSelectMap6.HitTest := False;
 
-  if Assigned(btnCancel) then
-    btnCancel.OnClick := CancelClick;
-  if Assigned(btnSelect) then
-    btnSelect.OnClick := SelectClick;
-
   // Apply shared button styling to the cancel/select buttons
   if Assigned(btnSelect) and Assigned(lblSelect) then
     ApplyButtonStyle(btnSelect, lblSelect, True);
@@ -194,57 +203,6 @@ begin
   end;
 end;
 
-procedure TFrame_MapSelection.SelectClick(Sender: TObject);
-var
-  ParentObj: TFmxObject;
-  NewFrame: TFrame;
-  Popup: TpopupSelectMap;
-  LSelf: TFrame_MapSelection;
-begin
-  // Ensure a map is selected
-  if FSelectedIdx < 0 then
-  begin
-    // Show custom popup instead of generic message
-    if Assigned(Parent) and (Parent is TControl) then
-    begin
-      Popup := TpopupSelectMap.Create(nil);
-      Popup.ShowOn(TControl(Parent));
-    end
-    else
-      ShowMessage('Please select a map first.');
-    Exit;
-  end;
-
-  ParentObj := Self.Parent;
-
-  case FSelectedIdx of
-    0: NewFrame := TFrame_Map1.Create(nil);
-    1: NewFrame := TFrame_Map2.Create(nil);
-    2: NewFrame := TFrame_Map3.Create(nil);
-    3: NewFrame := TFrame_Map4.Create(nil);
-    4: NewFrame := TFrame_Map5.Create(nil);
-    5: NewFrame := TFrame_Map6.Create(nil);
-  else
-    NewFrame := nil;
-  end;
-
-  if Assigned(NewFrame) then
-  begin
-    NewFrame.Parent := ParentObj;
-    NewFrame.Align := TAlignLayout.Client;
-    // Remove the selection dialog — defer Free to avoid freeing from within event stack
-    if Assigned(Self.Parent) then
-      Self.Parent := nil;
-    LSelf := Self;
-    TThread.Queue(nil,
-      procedure
-      begin
-        if not Application.Terminated and Assigned(LSelf) then
-          LSelf.Free;
-      end);
-  end;
-end;
-
 procedure TFrame_MapSelection.ShowOn(AParent: TControl);
 begin
   // Parent the frame to the given control (typically the main form) and center the dialog
@@ -256,8 +214,6 @@ begin
   // Center dialog in case Parent size changed
   if Assigned(Dialog) then
   begin
-    Dialog.Position.X := (Self.Width - Dialog.Width) / 2;
-    Dialog.Position.Y := (Self.Height - Dialog.Height) / 2;
     Dialog.BringToFront;
   end;
 end;
