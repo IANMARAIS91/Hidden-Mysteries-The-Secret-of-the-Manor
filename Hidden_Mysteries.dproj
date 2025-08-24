@@ -319,21 +319,6 @@
         <DCCReference Include="Lib\Ian\Ian.Config.pas"/>
         <DCCReference Include="Lib\Ian\Ian.Styling.Buttons.pas"/>
         <DCCReference Include="Lib\Ian\Ian.Utilities.pas"/>
-        <DCCReference Include="Pages\uFrame_About.pas">
-            <Form>Frame_About</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Pages\uFrame_Home.pas">
-            <Form>Frame_Home</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="Pages\uFrame_Instructions.pas">
-            <Form>Frame_Instructions</Form>
-            <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="Pages\uFrame_MainMenu.pas">
             <Form>Frame_MainMenu</Form>
             <FormType>fmx</FormType>
