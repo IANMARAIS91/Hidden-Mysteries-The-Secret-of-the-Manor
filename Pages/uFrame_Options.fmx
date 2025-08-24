@@ -1,0 +1,182 @@
+object Frame_Options: TFrame_Options
+  Size.Width = 1280.000000000000000000
+  Size.Height = 720.000000000000000000
+  Size.PlatformDefault = False
+  object Overlay: TRectangle
+    Align = Client
+    Fill.Color = claBlack
+    Opacity = 0.550000011920929000
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Dialog: TRectangle
+    Fill.Color = xFF5B5156
+    Position.X = 380.000000000000000000
+    Position.Y = 180.000000000000000000
+    Size.Width = 520.000000000000000000
+    Size.Height = 360.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFEDC7C3
+    Stroke.Thickness = 3.000000000000000000
+    XRadius = 14.000000000000000000
+    YRadius = 14.000000000000000000
+    object TitleLabel: TLabel
+      Align = Top
+      StyledSettings = []
+      Size.Width = 520.000000000000000000
+      Size.Height = 64.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'OPTIONS'
+    end
+    object Inner: TLayout
+      Align = Client
+      Margins.Left = 28.000000000000000000
+      Margins.Top = 72.000000000000000000
+      Margins.Right = 28.000000000000000000
+      Margins.Bottom = 72.000000000000000000
+      Size.Width = 464.000000000000000000
+      Size.Height = 81.000000000000000000
+      Size.PlatformDefault = False
+      object LabelMusic: TLabel
+        StyledSettings = []
+        Position.X = 20.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Music'
+      end
+      object SwitchMusic: TSwitch
+        IsChecked = True
+        Position.X = 380.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LabelSfx: TLabel
+        StyledSettings = []
+        Position.X = 20.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Sound Effects'
+      end
+      object SwitchSfx: TSwitch
+        IsChecked = True
+        Position.X = 380.000000000000000000
+        Position.Y = 52.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LabelFullscreen: TLabel
+        StyledSettings = []
+        Position.X = 20.000000000000000000
+        Position.Y = 102.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Text = 'Fullscreen'
+      end
+      object SwitchFullscreen: TSwitch
+        IsChecked = False
+        Position.X = 380.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object layButtonContainer: TLayout
+      Align = Bottom
+      Margins.Bottom = 15.000000000000000000
+      Position.Y = 289.000000000000000000
+      Size.Width = 520.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object layButtonCenterContainer: TLayout
+        Align = HorzCenter
+        Position.X = 176.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnSave: TRectangle
+          Align = Left
+          Cursor = crHandPoint
+          Fill.Color = x990A0A0A
+          Margins.Left = 12.000000000000000000
+          Position.X = 12.000000000000000000
+          Size.Width = 144.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = x7FB4A082
+          XRadius = 7.000000000000000000
+          YRadius = 7.000000000000000000
+          object lblSave: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            Size.Width = 144.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'SAVE'
+            TabOrder = 0
+          end
+        end
+      end
+    end
+    object Layout1: TLayout
+      Position.Y = 16.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object btnCancel: TRectangle
+        Align = Left
+        Cursor = crHandPoint
+        Fill.Color = x990A0A0A
+        Margins.Left = 12.000000000000000000
+        Position.X = 12.000000000000000000
+        Size.Width = 53.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = x7FB4A082
+        XRadius = 7.000000000000000000
+        YRadius = 7.000000000000000000
+        object lblCancel: TLabel
+          Align = Client
+          Cursor = crHandPoint
+          StyledSettings = [Family]
+          Size.Width = 53.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Center
+          Text = 'X'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+end

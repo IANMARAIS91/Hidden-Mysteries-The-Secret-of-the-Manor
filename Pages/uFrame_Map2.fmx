@@ -1,0 +1,5 @@
+object Frame_Map2: TFrame_Map2
+  Size.Width = 343.000000000000000000
+  Size.Height = 215.000000000000000000
+  Size.PlatformDefault = False
+end
