@@ -9,20 +9,20 @@ uses
 
 type
   TFrame_Map1 = class(TFrame)
-    Image1: TImage;
-    Monitor1: TLayout;
-    Monitor2: TLayout;
-    Monitor3: TLayout;
-    Laptop4: TLayout;
-    Laptop2: TLayout;
-    Laptop3: TLayout;
-    Laptop1: TLayout;
+    imgMap: TImage;
+    layMapCHI_Monitor1: TLayout;
+    layMapCHI_Monitor2: TLayout;
+    layMapCHI_Monitor3: TLayout;
+    layMapCHI_Laptop4: TLayout;
+    layMapCHI_Laptop2: TLayout;
+    layMapCHI_Laptop3: TLayout;
+    layMapCHI_Laptop1: TLayout;
     Layout1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;
     Rectangle1: TRectangle;
-    procedure Monitor1Click(Sender: TObject);
-    procedure Laptop1Click(Sender: TObject);
+    procedure layMapCHI_Monitor1Click(Sender: TObject);
+    procedure layMapCHI_Laptop1Click(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
   private
     procedure UpdateImageCover;
@@ -41,7 +41,7 @@ uses
 
 {$R *.fmx}
 
-procedure TFrame_Map1.Laptop1Click(Sender: TObject);
+procedure TFrame_Map1.layMapCHI_Laptop1Click(Sender: TObject);
 begin
   ShowMessage('You found the laptop!');
 end;
@@ -57,16 +57,16 @@ begin
   // Ensure child content does not draw outside the frame
   ClipChildren := True;
 
-  if Assigned(Image1) then
+  if Assigned(imgMap) then
   begin
     // We'll size/position the image manually to achieve a "cover" effect
-    Image1.Align := TAlignLayout.None;
+    imgMap.Align := TAlignLayout.None;
   end;
 
   UpdateImageCover;
 end;
 
-procedure TFrame_Map1.Monitor1Click(Sender: TObject);
+procedure TFrame_Map1.layMapCHI_Monitor1Click(Sender: TObject);
 begin
   ShowMessage('You found the monitor!');
 end;
@@ -81,7 +81,7 @@ procedure TFrame_Map1.UpdateImageCover;
 var
   pw, ph, iw, ih, scale: Single;
 begin
-  if not Assigned(Image1) then
+  if not Assigned(imgMap) then
     Exit;
 
   pw := Width;
@@ -89,26 +89,26 @@ begin
   if (pw <= 0) or (ph <= 0) then
     Exit;
 
-  if (Image1.Bitmap <> nil) and (Image1.Bitmap.Width > 0) and (Image1.Bitmap.Height > 0) then
+  if (imgMap.Bitmap <> nil) and (imgMap.Bitmap.Width > 0) and (imgMap.Bitmap.Height > 0) then
   begin
-    iw := Image1.Bitmap.Width;
-    ih := Image1.Bitmap.Height;
+    iw := imgMap.Bitmap.Width;
+    ih := imgMap.Bitmap.Height;
   end
   else
   begin
     // Fallback to current size if bitmap not yet available
-    iw := Max(1, Image1.Width);
-    ih := Max(1, Image1.Height);
+    iw := Max(1, imgMap.Width);
+    ih := Max(1, imgMap.Height);
   end;
 
   // Scale to cover the entire frame (may crop image on edges, preserves aspect)
   scale := Max(pw / iw, ph / ih);
 
-  Image1.Align := TAlignLayout.None;
-  Image1.Width := iw * scale;
-  Image1.Height := ih * scale;
-  Image1.Position.X := (pw - Image1.Width) / 2;
-  Image1.Position.Y := (ph - Image1.Height) / 2;
+  imgMap.Align := TAlignLayout.None;
+  imgMap.Width := iw * scale;
+  imgMap.Height := ih * scale;
+  imgMap.Position.X := (pw - imgMap.Width) / 2;
+  imgMap.Position.Y := (ph - imgMap.Height) / 2;
 end;
 
 end.
