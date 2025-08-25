@@ -209,8 +209,6 @@ begin
 
   // Animations for Section1Next/Section1Back intentionally disabled; do not wire hover events
 
-  // Animations for Section1Next/Section1Back intentionally disabled; do not wire hover events
-
   // Start hidden; owner code should call ShowOn
   Self.Visible := False;
 
