@@ -27,12 +27,28 @@ type
     GloomEffect1: TGloomEffect;
     Section1Next: TSkSvg;
     Section1Back: TSkSvg;
+    Overlay: TRectangle;
+    Dialog: TRectangle;
+    TitleLabel: TLabel;
+    Section1: TRectangle;
+    SelectMap1: TRectangle;
+    SelectMap2: TRectangle;
+    SelectMap3: TRectangle;
+    lblSelectMap1: TLabel;
+    lblSelectMap2: TLabel;
+    lblSelectMap3: TLabel;
+    SectionTutorial: TRectangle;
+    SelectMapTutorial: TRectangle;
+    lblSelectMapTutorial: TLabel;
+    SectionTutorialNext: TSkSvg;
     procedure btnCancelClick(Sender: TObject);
     procedure btnSelectClick(Sender: TObject);
     procedure Section1NextMouseEnter(Sender: TObject);
     procedure Section1NextMouseLeave(Sender: TObject);
     procedure Section1BackMouseLeave(Sender: TObject);
     procedure Section1BackMouseEnter(Sender: TObject);
+    procedure SectionTutorialNextClick(Sender: TObject);
+    procedure Section1BackClick(Sender: TObject);
   private
     // Selection state and helpers
     FSelectedIdx: Integer;
@@ -190,6 +206,12 @@ begin
   // ...existing code for loading icons ...
 end;
 
+procedure TFrame_MapSelection.Section1BackClick(Sender: TObject);
+begin
+  SectionTutorial.BringToFront;
+  SectionTutorial.Repaint;
+end;
+
 procedure TFrame_MapSelection.Section1BackMouseEnter(Sender: TObject);
 var
   Ctrl: TControl;
@@ -254,6 +276,12 @@ begin
       TargetX := Ctrl.Position.X - 8;
     TAnimator.AnimateFloat(Ctrl, 'Position.X', TargetX, 0.15, TAnimationType.&Out, TInterpolationType.Linear);
   end;
+end;
+
+procedure TFrame_MapSelection.SectionTutorialNextClick(Sender: TObject);
+begin
+  Section1.BringToFront;
+  Section1.Repaint;
 end;
 
 procedure TFrame_MapSelection.SelectTile(ATile: TRectangle);
