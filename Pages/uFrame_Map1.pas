@@ -52,6 +52,7 @@ uses
 
 {$R *.fmx}
 
+<<<<<<< HEAD
 constructor TFrame_Map1.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -119,6 +120,8 @@ begin
   end;
 end;
 
+=======
+>>>>>>> 4c19799dd66a2022241fcd68149b3ccffac435d5
 procedure TFrame_Map1.layMapCHI_Laptop1Click(Sender: TObject);
 begin
   ShowMessage('You found the laptop!');
@@ -189,6 +192,7 @@ begin
   imgMap.Height := ih * scale;
   imgMap.Position.X := (pw - imgMap.Width) / 2;
   imgMap.Position.Y := (ph - imgMap.Height) / 2;
+<<<<<<< HEAD
 
   // store last-known image transform so CHI controls can be pinned to image pixels
   FImgScale := scale;
@@ -196,6 +200,8 @@ begin
 
   // Reposition CHI-aware controls to match image pixel coordinates
   RepositionCHIControls;
+=======
+>>>>>>> 4c19799dd66a2022241fcd68149b3ccffac435d5
 end;
 
 end.
