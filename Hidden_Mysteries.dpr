@@ -3,6 +3,7 @@ program Hidden_Mysteries;
 uses
   System.StartUpCopy,
   FMX.Forms,
+  FMX.Skia,
   uMain in 'uMain.pas' {FrmMain},
   uConfig in 'Data\uConfig.pas',
   UniPas.Routing in 'Lib\UniPas\UniPas.Routing.pas',
@@ -21,11 +22,13 @@ uses
   uFrame_Map5 in 'Pages\uFrame_Map5.pas' {Frame_Map5: TFrame},
   uFrame_Map6 in 'Pages\uFrame_Map6.pas' {Frame_Map6: TFrame},
   uFrame_MapSelection in 'Pages\uFrame_MapSelection.pas' {Frame_MapSelection: TFrame},
-  uFrame_Options in 'Pages\uFrame_Options.pas' {Frame_Options: TFrame};
+  uFrame_Options in 'Pages\uFrame_Options.pas' {Frame_Options: TFrame},
+  uBootstrapIcons in 'Lib\Delphi-Bootstrap-Icons\uBootstrapIcons.pas';
 
 {$R *.res}
 
 begin
+  GlobalUseSkia := True;
   Application.Initialize;
   Application.CreateForm(TFrmMain, FrmMain);
   Application.Run;

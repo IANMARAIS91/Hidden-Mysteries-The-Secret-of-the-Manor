@@ -14,9 +14,9 @@ type
   TFrmMain = class(TForm)
     UniPasContainer: TLayout;
     procedure FormCreate(Sender: TObject);
-    procedure FormResize(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
+  
   public
     { Public declarations }
   end;
@@ -30,47 +30,6 @@ uses
   System.IniFiles, System.IOUtils, Ian.Config;
 
 {$R *.fmx}
-
-procedure DisableAnimationsRecursively(AObj: TFmxObject);
-var
-  i: Integer;
-begin
-  if not Assigned(AObj) then
-    Exit;
-  // Clear any TFloatAnimation components owned by this object
-  for i := 0 to AObj.ComponentCount - 1 do
-    if AObj.Components[i] is TFloatAnimation then
-    begin
-      try
-        TFloatAnimation(AObj.Components[i]).OnFinish := nil;
-        TFloatAnimation(AObj.Components[i]).Enabled := False;
-      except
-        // ignore
-      end;
-    end;
-  // Recurse children
-  for i := 0 to AObj.ChildrenCount - 1 do
-    DisableAnimationsRecursively(AObj.Children[i]);
-end;
-
-procedure ClearMouseHandlersRecursively(AObj: TFmxObject);
-var
-  i: Integer;
-begin
-  if not Assigned(AObj) then
-    Exit;
-  if AObj is TRectangle then
-  begin
-    try
-      TRectangle(AObj).OnMouseEnter := nil;
-      TRectangle(AObj).OnMouseLeave := nil;
-    except
-      // ignore
-    end;
-  end;
-  for i := 0 to AObj.ChildrenCount - 1 do
-    ClearMouseHandlersRecursively(AObj.Children[i]);
-end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 var
@@ -133,20 +92,6 @@ begin
   except
     // ignore any IO errors during shutdown
   end;
-
-  // At shutdown, proactively clear animation callbacks and mouse handlers so
-  // no event will call into objects that are in the process of being freed.
-  try
-    DisableAnimationsRecursively(Self);
-    ClearMouseHandlersRecursively(Self);
-  except
-    // best-effort cleanup; ignore any errors
-  end;
-end;
-
-procedure TFrmMain.FormResize(Sender: TObject);
-begin
-  // no-op: frame is client-aligned and handles its own layout (background image)
 end;
 
 end.

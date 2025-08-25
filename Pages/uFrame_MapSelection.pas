@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.Effects,
-  FMX.Filter.Effects;
+  FMX.Filter.Effects, uBootstrapIcons, System.Skia, FMX.Skia,
+  System.Generics.Collections;
 
 type
   TFrame_MapSelection = class(TFrame)
@@ -24,30 +25,44 @@ type
     lblSelectMap6: TLabel;
     imgBackground: TImage;
     GloomEffect1: TGloomEffect;
-    procedure btnCancelClick(Sender: TObject);
-    procedure btnSelectClick(Sender: TObject);
-  private
-    // Selection state and helpers
-    FSelectedIdx: Integer;
-    FSelectedTile: TRectangle;
-    procedure TileClick(Sender: TObject);
-    procedure SelectTile(ATile: TRectangle);
-    procedure ApplyTileStyle(ATile: TRectangle; const ASelected: Boolean);
-  protected
-    procedure Loaded; override;
-  published
-    // Design-time components (moved into .fmx)
+    Section1Next: TSkSvg;
+    Section1Back: TSkSvg;
     Overlay: TRectangle;
     Dialog: TRectangle;
     TitleLabel: TLabel;
-    Inner: TRectangle;
+    Section1: TRectangle;
     SelectMap1: TRectangle;
     SelectMap2: TRectangle;
     SelectMap3: TRectangle;
     lblSelectMap1: TLabel;
     lblSelectMap2: TLabel;
     lblSelectMap3: TLabel;
+    SectionTutorial: TRectangle;
+    SelectMapTutorial: TRectangle;
+    lblSelectMapTutorial: TLabel;
+    SectionTutorialNext: TSkSvg;
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnSelectClick(Sender: TObject);
+    procedure Section1NextMouseEnter(Sender: TObject);
+    procedure Section1NextMouseLeave(Sender: TObject);
+    procedure Section1BackMouseLeave(Sender: TObject);
+    procedure Section1BackMouseEnter(Sender: TObject);
+    procedure SectionTutorialNextClick(Sender: TObject);
+    procedure Section1BackClick(Sender: TObject);
+  private
+    // Selection state and helpers
+    FSelectedIdx: Integer;
+    FSelectedTile: TRectangle;
+    FOriginalPos: TDictionary<TControl, Single>;
+    procedure TileClick(Sender: TObject);
+    procedure SelectTile(ATile: TRectangle);
+    procedure ApplyTileStyle(ATile: TRectangle; const ASelected: Boolean);
+  protected
+    procedure Loaded; override;
   public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
     procedure ShowOn(AParent: TControl);
     property SelectedIndex: Integer read FSelectedIdx;
   end;
@@ -57,11 +72,25 @@ implementation
 uses
   Ian.Styling.Buttons,
   UniPas.Routing, // delegate creation/navigation
-  popSelectMap; // added System.Classes for TThread
+  popSelectMap, // added System.Classes for TThread
+  FMX.Ani,
+  System.NetEncoding;
 
 {$R *.fmx}
 
 { TFrame_MapSelection }
+
+constructor TFrame_MapSelection.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FOriginalPos := TDictionary<TControl, Single>.Create;
+end;
+
+destructor TFrame_MapSelection.Destroy;
+begin
+  FOriginalPos.Free;
+  inherited Destroy;
+end;
 
 procedure TFrame_MapSelection.btnCancelClick(Sender: TObject);
 begin
@@ -104,6 +133,12 @@ begin
 end;
 
 procedure TFrame_MapSelection.Loaded;
+var
+  SvgBase64: string;
+  CommaPos: Integer;
+  Bytes: TBytes;
+  Stream: TBytesStream;
+  Bmp: TBitmap;
 begin
   inherited Loaded;
 
@@ -140,12 +175,20 @@ begin
     SelectMap6.OnClick := TileClick;
   end;
 
+  // Tutorial tile should participate in the same selection flow and map to Map1
+  if Assigned(SelectMapTutorial) then
+  begin
+    SelectMapTutorial.Tag := 0; // tutorial launches Map1
+    SelectMapTutorial.OnClick := TileClick;
+  end;
+
   // Let label clicks pass through to the tiles
   if Assigned(lblSelectMap1) then lblSelectMap1.HitTest := False;
   if Assigned(lblSelectMap2) then lblSelectMap2.HitTest := False;
   if Assigned(lblSelectMap3) then lblSelectMap3.HitTest := False;
   if Assigned(lblSelectMap5) then lblSelectMap5.HitTest := False;
   if Assigned(lblSelectMap6) then lblSelectMap6.HitTest := False;
+  if Assigned(lblSelectMapTutorial) then lblSelectMapTutorial.HitTest := False;
 
   // Apply shared button styling to the cancel/select buttons
   if Assigned(btnSelect) and Assigned(lblSelect) then
@@ -162,9 +205,92 @@ begin
   ApplyTileStyle(SelectMap4, False);
   ApplyTileStyle(SelectMap5, False);
   ApplyTileStyle(SelectMap6, False);
+  ApplyTileStyle(SelectMapTutorial, False);
+
+  // Animations for Section1Next/Section1Back intentionally disabled; do not wire hover events
 
   // Start hidden; owner code should call ShowOn
   Self.Visible := False;
+
+  // ...existing code for loading icons ...
+end;
+
+procedure TFrame_MapSelection.Section1BackClick(Sender: TObject);
+begin
+  SectionTutorial.BringToFront;
+  SectionTutorial.Repaint;
+end;
+
+procedure TFrame_MapSelection.Section1BackMouseEnter(Sender: TObject);
+var
+  Ctrl: TControl;
+  TargetX: Single;
+begin
+  if Sender is TControl then
+  begin
+    Ctrl := TControl(Sender);
+    // Store original X if we haven't already so repeated fast hovers don't accumulate
+    if not FOriginalPos.ContainsKey(Ctrl) then
+      FOriginalPos.Add(Ctrl, Ctrl.Position.X);
+    TargetX := FOriginalPos[Ctrl] - 8;
+    // Animate to the left by 8px over 150ms
+    TAnimator.AnimateFloat(Ctrl, 'Position.X', TargetX, 0.15, TAnimationType.&Out, TInterpolationType.Linear);
+  end;
+end;
+
+procedure TFrame_MapSelection.Section1BackMouseLeave(Sender: TObject);
+var
+  Ctrl: TControl;
+  TargetX: Single;
+begin
+  if Sender is TControl then
+  begin
+    Ctrl := TControl(Sender);
+    // Animate back to the stored original position (fallback to current+8 if missing)
+    if FOriginalPos.ContainsKey(Ctrl) then
+      TargetX := FOriginalPos[Ctrl]
+    else
+      TargetX := Ctrl.Position.X + 8;
+    TAnimator.AnimateFloat(Ctrl, 'Position.X', TargetX, 0.15, TAnimationType.&Out, TInterpolationType.Linear);
+  end;
+end;
+
+procedure TFrame_MapSelection.Section1NextMouseEnter(Sender: TObject);
+var
+  Ctrl: TControl;
+  TargetX: Single;
+begin
+  if Sender is TControl then
+  begin
+    Ctrl := TControl(Sender);
+    if not FOriginalPos.ContainsKey(Ctrl) then
+      FOriginalPos.Add(Ctrl, Ctrl.Position.X);
+    TargetX := FOriginalPos[Ctrl] + 8;
+    // Animate to the right by 8px over 150ms
+    TAnimator.AnimateFloat(Ctrl, 'Position.X', TargetX, 0.15, TAnimationType.&Out, TInterpolationType.Linear);
+  end;
+end;
+
+procedure TFrame_MapSelection.Section1NextMouseLeave(Sender: TObject);
+var
+  Ctrl: TControl;
+  TargetX: Single;
+begin
+  if Sender is TControl then
+  begin
+    Ctrl := TControl(Sender);
+    if FOriginalPos.ContainsKey(Ctrl) then
+      TargetX := FOriginalPos[Ctrl]
+    else
+      TargetX := Ctrl.Position.X - 8;
+    TAnimator.AnimateFloat(Ctrl, 'Position.X', TargetX, 0.15, TAnimationType.&Out, TInterpolationType.Linear);
+  end;
+end;
+
+procedure TFrame_MapSelection.SectionTutorialNextClick(Sender: TObject);
+begin
+  Section1.BringToFront;
+  Section1.Repaint;
 end;
 
 procedure TFrame_MapSelection.SelectTile(ATile: TRectangle);
