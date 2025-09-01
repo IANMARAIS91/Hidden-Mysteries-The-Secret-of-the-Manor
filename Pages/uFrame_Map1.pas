@@ -5,271 +5,221 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation,
-  System.Generics.Collections; // moved/added so generics are available in interface
+  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation;
 
 type
   TFrame_Map1 = class(TFrame)
-    imgMap: TImage;
-    layMapCHI_Monitor1: TRectangle;
-    layMapCHI_Monitor2: TRectangle;
-    layMapCHI_Monitor3: TRectangle;
-    layMapCHI_Laptop4: TRectangle;
-    layMapCHI_Laptop2: TRectangle;
-    layMapCHI_Laptop3: TRectangle;
-    layMapCHI_Laptop1: TRectangle;
-    Layout1: TLayout;
+    Lay_Map1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;
-    Rectangle1: TRectangle;
-    Rectangle2: TRectangle;
-    procedure layMapCHI_Monitor1Click(Sender: TObject);
-    procedure layMapCHI_Laptop1Click(Sender: TObject);
+    Rect_Map1: TRectangle;
+    Rect_buttons_Section: TRectangle;
+    img_Map1: TImage;
+    ScaledLayout1: TScaledLayout;
+    LayMapCHI_Auroralumina_Attenboroughii_1_1: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_2: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_3: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_4: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_5: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_6: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_7: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_8: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_1_9: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_1: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_2: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_3: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_4: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_5: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_6: TEllipse;
+    LayMapCHI_Auroralumina_Attenboroughii_2_7: TEllipse;
+    LayMapCHI_Beothukis_Mistakensis_1: TEllipse;
+    LayMapCHI_Beothukis_Mistakensis_2: TEllipse;
+    LayMapCHI_Beothukis_Mistakensis_3: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_1_1: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_1_2: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_1_3: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_1: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_2: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_3: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_4: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_5: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_6: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_2_7: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_3_1: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_3_2: TEllipse;
+    LayMapCHI_Bradgatia_Linfordensis_3_3: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_1: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_10: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_11: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_12: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_13: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_2: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_3: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_4: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_5: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_8: TEllipse;
+    LayMapCHI_Charnia_Masoni_1_9: TEllipse;
+    LayMapCHI_Charnia_Masoni_3_1: TEllipse;
+    LayMapCHI_Charnia_Masoni_3_2: TEllipse;
+    LayMapCHI_Charnia_Masoni_3_3: TEllipse;
+    LayMapCHI_Charnia_Masoni_3_4: TEllipse;
+    LayMapCHI_Dickinsonia_Costata_1_1: TEllipse;
+    LayMapCHI_Dickinsonia_Costata_1_2: TEllipse;
+    LayMapCHI_Dickinsonia_Costata_2: TEllipse;
+    LayMapCHI_Fractofusus_Misrai_1: TEllipse;
+    LayMapCHI_Fractofusus_Misrai_2: TEllipse;
+    LayMapCHI_Fractofusus_Misrai_3: TEllipse;
+    LayMapCHI_Fractofusus_Misrai_4: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_1_1: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_1_2: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_1_3: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_1_4: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_2_1: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_2_2: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_2_3: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_2_4: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_3_1: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_3_2: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_3_3: TEllipse;
+    LayMapCHI_Kimberella_Quadrata_3_4: TEllipse;
+    LayMapCHI_Metaspriggina_1_1: TEllipse;
+    LayMapCHI_Metaspriggina_1_2: TEllipse;
+    LayMapCHI_Metaspriggina_1_3: TEllipse;
+    LayMapCHI_Metaspriggina_2_1: TEllipse;
+    LayMapCHI_Metaspriggina_2_2: TEllipse;
+    LayMapCHI_Metaspriggina_2_3: TEllipse;
+    LayMapCHI_Metaspriggina_2_4: TEllipse;
+    LayMapCHI_Metaspriggina_2_5: TEllipse;
+    LayMapCHI_Metaspriggina_2_6: TEllipse;
+    LayMapCHI_Metaspriggina_2_7: TEllipse;
+    LayMapCHI_Metaspriggina_2_8: TEllipse;
+    LayMapCHI_Metaspriggina_2_9: TEllipse;
+    LayMapCHI_Metaspriggina_3_1: TEllipse;
+    LayMapCHI_Metaspriggina_3_2: TEllipse;
+    LayMapCHI_Pteridinium_1: TEllipse;
+    LayMapCHI_Pteridinium_2_1: TEllipse;
+    LayMapCHI_Pteridinium_2_2: TEllipse;
+    LayMapCHI_Pteridinium_2_3: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_1: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_2: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_3: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_4: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_5: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_6: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_7: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_8: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_1_9: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_1: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_10: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_2: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_3: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_4: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_5: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_6: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_7: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_8: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_2_9: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_1: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_10: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_2: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_3: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_4: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_5: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_6: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_7: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_8: TEllipse;
+    LayMapCHI_Rangea_Schneiderhoehni_3_9: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_1_1: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_1_2: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_1_3: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_2_1: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_2_2: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_2_3: TEllipse;
+    LayMapCHI_Spriggina_Floundersi_2_4: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_1: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_2: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_3: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_4: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_5: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_6: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_2_7: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_3_1: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_3_2: TEllipse;
+    LayMapCHI_Thectadris_Avalonensis_3_3: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_1_1: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_1_2: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_1_3: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_1_4: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_1: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_2: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_3: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_4: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_5: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_6: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_7: TEllipse;
+    LayMapCHI_Thectardis_Avalonensis_3_8: TEllipse;
+    LayMapCHI_Tribrachidium_Heraldicum_1: TEllipse;
+    LayMapCHI_Tribrachidium_Heraldicum_2: TEllipse;
+    LayMapCHI_Tribrachidium_Heraldicum_3_1: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1_1: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1_2: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1_3: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1_4: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_1_5: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_1: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_2: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_3: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_4: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_5: TEllipse;
+    LayMapCHI_Yorgia_Waggoneri_2_6: TEllipse;
+    LayMapCHI_Metaspriggina_3_3: TEllipse;
+    LayMapCHI_Metaspriggina_3_4: TEllipse;
+    img_Auroralumina_Attenboroughii: TImage;
+    img_Bradgatia_Linfordensis: TImage;
+    img_Charnia_Masoni: TImage;
+    img_Dickinsonia_Costata: TImage;
+    img_Fractofusus_Misrai: TImage;
+    img_Kimberella_Quadrata: TImage;
+    img_Metaspriggina: TImage;
+    img_Pteridinium: TImage;
+    img_Rangea_Schneiderhoehni: TImage;
+    img_Spriggina_floundersi: TImage;
+    img_Thectardis_avalonensis: TImage;
+    img_Tribrachidium_heraldicum: TImage;
+    img_Yorgia_Waggoneri: TImage;
+    LayMapCHI_Bradgatia_Linfordensis_3_4: TEllipse;
+    img_Beothukis_Mistakensis: TImage;
+    Text_Beothukis_Mistakensis: TText;
+    Text_Bradgatia_Linfordensis: TText;
+    Text_Pteridinium: TText;
+    Text_Thectardis_Avalonensis: TText;
+    Text_Spriggina_Floundersi: TText;
+    Text_Yorgia_Waggoneri: TText;
+    Text_Auroralumina_Attenboroughii: TText;
+    Text_Tribrachidiu_Heraldicum: TText;
+    Text_Kimberella_Quadrata: TText;
+    Text_Rangea_Schneiderhoehni: TText;
+    Text_Fractofusus_Misrai: TText;
+    Text_Dickinsonia_Costata: TText;
+    Text_Metaspriggina: TText;
+    Text_Charnia_Masoni: TText;
     procedure btnCancelClick(Sender: TObject);
   private
-    // Track CHI layout controls so we can pin them to image pixels
-    FCHIControls: TList<TControl>;
-    FCHIOrigin: TDictionary<TControl, TPointF>; // original image-space coordinates (pixels)
-    FImgScale: Single; // last computed image scale
-    FImgPos: TPointF;  // last computed top-left of imgMap
-    FCHISize: TDictionary<TControl, TPointF>; // original size in image pixel space (width, height)
-    FRegisteredImgScale: Single; // the image scale when CHI controls were registered
-
-    procedure UpdateImageCover;
-    procedure RegisterCHIControls;
-    procedure RepositionCHIControls;
   protected
-    procedure Loaded; override;
-    procedure Resize; override;
   public
-    constructor Create(AOwner: TComponent); override;
-    destructor Destroy; override;
-    { Public declarations }
-    // Ensure CHI controls are registered and repositioned/scaled to match the image.
-    procedure ScaleCHIWithImage;
   end;
 
 implementation
 
 uses
-  System.Math,
   UniPas.Routing; // use routing to show map selection
 
 {$R *.fmx}
 
-constructor TFrame_Map1.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  FCHIControls := TList<TControl>.Create;
-  FCHIOrigin := TDictionary<TControl, TPointF>.Create;
-  FCHISize := TDictionary<TControl, TPointF>.Create;
-  FImgScale := 1.0;
-  FImgPos := PointF(0, 0);
-  FRegisteredImgScale := 0.0;
-end;
-
-destructor TFrame_Map1.Destroy;
-begin
-  FCHIOrigin.Free;
-  FCHISize.Free;
-  FCHIControls.Free;
-  inherited Destroy;
-end;
-
-procedure TFrame_Map1.RegisterCHIControls;
-var
-  i: Integer;
-  C: TComponent;
-  L: TControl;
-  Orig, SizeOrig: TPointF;
-  CtrlAbs, ImgAbs: TPointF;
-begin
-  if not Assigned(FCHIControls) or not Assigned(FCHIOrigin) or not Assigned(FCHISize) then
-    Exit;
-
-  // Avoid re-registering if we've already captured original image-space coordinates
-  // If we've already registered for the current image scale, skip. Otherwise re-register
-  if (FCHIControls.Count > 0) and (Abs(FRegisteredImgScale - FImgScale) < 1e-6) then
-    Exit;
-
-  FCHIControls.Clear;
-  FCHIOrigin.Clear;
-  FCHISize.Clear;
-
-  // Compute origin positions in image pixel space using the last known image scale/position
-  for i := 0 to ComponentCount - 1 do
-  begin
-    C := Components[i];
-    // Accept any visual control (TControl) that matches the naming prefix. Many CHI items are TRectangle.
-    if (C is TControl) and (Pos('layMapCHI_', C.Name) = 1) then
-    begin
-      L := TControl(C);
-      FCHIControls.Add(L);
-
-      // Use absolute coordinates so nested parents don't break mapping
-      CtrlAbs := L.LocalToAbsolute(PointF(0, 0));
-      ImgAbs := imgMap.LocalToAbsolute(PointF(0, 0));
-
-      if FImgScale > 0 then
-        Orig := PointF((CtrlAbs.X - ImgAbs.X) / FImgScale, (CtrlAbs.Y - ImgAbs.Y) / FImgScale)
-      else
-        Orig := PointF(CtrlAbs.X - ImgAbs.X, CtrlAbs.Y - ImgAbs.Y);
-      FCHIOrigin.Add(L, Orig);
-
-      // Store original size in image pixel space so controls scale with the image
-      if FImgScale > 0 then
-        SizeOrig := PointF(L.Width / FImgScale, L.Height / FImgScale)
-      else
-        SizeOrig := PointF(L.Width, L.Height);
-      FCHISize.Add(L, SizeOrig);
-    end;
-  end;
-
-  // Remember the image scale used so we can avoid unnecessary re-registration
-  FRegisteredImgScale := FImgScale;
-end;
-
-procedure TFrame_Map1.RepositionCHIControls;
-var
-  i: Integer;
-  L: TControl;
-  Orig, SizeOrig: TPointF;
-  ImgTopAbs, NewAbs, ParentLocal: TPointF;
-begin
-  if not Assigned(FCHIControls) or not Assigned(FCHIOrigin) or not Assigned(FCHISize) then
-    Exit;
-
-  ImgTopAbs := imgMap.LocalToAbsolute(PointF(0, 0));
-
-  for i := 0 to FCHIControls.Count - 1 do
-  begin
-    L := FCHIControls.Items[i];
-    if Assigned(L) and FCHIOrigin.TryGetValue(L, Orig) then
-    begin
-      // Compute new absolute position for the control based on image top-left and scaled origin
-      NewAbs := PointF(ImgTopAbs.X + Orig.X * FImgScale, ImgTopAbs.Y + Orig.Y * FImgScale);
-
-      // Convert absolute position back into the control parent's local coordinates
-      if Assigned(L.Parent) then
-      begin
-        if L.Parent is TControl then
-        begin
-          ParentLocal := TControl(L.Parent).AbsoluteToLocal(NewAbs);
-          L.Position.Point := ParentLocal; // set position relative to parent
-        end
-        else
-        begin
-          // Parent isn't a TControl (rare) - convert relative to this frame instead
-          ParentLocal := AbsoluteToLocal(NewAbs);
-          L.Position.Point := ParentLocal;
-        end;
-      end
-      else
-      begin
-        // No parent? set position using frame-local coordinates
-        L.Position.X := NewAbs.X - FImgPos.X;
-        L.Position.Y := NewAbs.Y - FImgPos.Y;
-      end;
-
-      // Apply scaled size so layouts scale with the image
-      if FCHISize.TryGetValue(L, SizeOrig) then
-      begin
-        L.Width := SizeOrig.X * FImgScale;
-        L.Height := SizeOrig.Y * FImgScale;
-      end;
-    end;
-  end;
-end;
-
-procedure TFrame_Map1.layMapCHI_Laptop1Click(Sender: TObject);
-begin
-  ShowMessage('You found the laptop!');
-end;
-
 procedure TFrame_Map1.btnCancelClick(Sender: TObject);
 begin
   TUniPas.RenderPage('MapSelection');
-end;
-
-procedure TFrame_Map1.Loaded;
-begin
-  inherited;
-  // Ensure child content does not draw outside the frame
-  ClipChildren := True;
-
-  if Assigned(imgMap) then
-  begin
-    // We'll size/position the image manually to achieve a "cover" effect
-    imgMap.Align := TAlignLayout.None;
-  end;
-
-  UpdateImageCover;
-  // Register CHI controls now that image has been positioned/scaled
-  RegisterCHIControls;
-end;
-
-procedure TFrame_Map1.layMapCHI_Monitor1Click(Sender: TObject);
-begin
-  ShowMessage('You found the monitor!');
-end;
-
-procedure TFrame_Map1.Resize;
-begin
-  inherited;
-  UpdateImageCover;
-  // Ensure CHI controls follow the image when the frame resizes
-  ScaleCHIWithImage;
-end;
-
-procedure TFrame_Map1.ScaleCHIWithImage;
-begin
-  // Ensure controls have been registered (capture original image-space positions once)
-  if Assigned(FCHIControls) and (FCHIControls.Count = 0) then
-    RegisterCHIControls;
-
-  // Reposition/scale CHI-aware controls according to the latest image transform
-  RepositionCHIControls;
-end;
-
-procedure TFrame_Map1.UpdateImageCover;
-var
-  pw, ph, iw, ih, scale: Single;
-begin
-  if not Assigned(imgMap) then
-    Exit;
-
-  pw := Width;
-  ph := Height;
-  if (pw <= 0) or (ph <= 0) then
-    Exit;
-
-  if (imgMap.Bitmap <> nil) and (imgMap.Bitmap.Width > 0) and (imgMap.Bitmap.Height > 0) then
-  begin
-    iw := imgMap.Bitmap.Width;
-    ih := imgMap.Bitmap.Height;
-  end
-  else
-  begin
-    // Fallback to current size if bitmap not yet available
-    iw := Max(1, imgMap.Width);
-    ih := Max(1, imgMap.Height);
-  end;
-
-  // Scale to cover the entire frame (may crop image on edges, preserves aspect)
-  scale := Max(pw / iw, ph / ih);
-
-  imgMap.Align := TAlignLayout.None;
-  imgMap.Width := iw * scale;
-  imgMap.Height := ih * scale;
-  imgMap.Position.X := (pw - imgMap.Width) / 2;
-  imgMap.Position.Y := (ph - imgMap.Height) / 2;
-
-  // store last-known image transform so CHI controls can be pinned to image pixels
-  FImgScale := scale;
-  FImgPos := PointF(imgMap.Position.X, imgMap.Position.Y);
-
-  // Reposition CHI-aware controls to match image pixel coordinates
-  RepositionCHIControls;
 end;
 
 end.
