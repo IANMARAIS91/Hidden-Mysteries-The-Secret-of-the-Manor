@@ -243,6 +243,8 @@ type
     procedure Found_Thectadris_Avalonensis_4(Sender: TObject); procedure Found_Yoriga_Waggoneri_2(Sender: TObject);
     procedure Found_Yoriga_Waggoneri_1(Sender: TObject); procedure Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
     procedure Found_Tribrachidiun_Heraldicum_2(Sender: TObject); procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
+    procedure FramePainting(Sender: TObject; Canvas: TCanvas;
+      const ARect: TRectF);
   private
     FTotal: Integer;
     FRemaining: Integer;
@@ -280,7 +282,21 @@ begin
     lbl_Title_Counter.Text := 'TOTAL';
   UpdateCounter;
   // ensure grid items size appropriately for two columns
-  AdjustGridItemWidth;
+  // Defer the actual adjustment to the main queue so the parent/control sizes are finalized
+  TThread.Queue(nil,
+    procedure
+    begin
+      AdjustGridItemWidth;
+      // force redraw so the GridLayout items take the new widths immediately
+      if Assigned(GridLayout1) then
+      begin
+        GridLayout1.Repaint;
+        if Assigned(GridLayout1.Parent) and (GridLayout1.Parent is TControl) then
+          TControl(GridLayout1.Parent).Repaint;
+      end;
+      if Assigned(VertScrollBox1) then
+        VertScrollBox1.Repaint;
+    end);
   // ensure the cancel label shows the X (restore original)
   if Assigned(lblCancel) then
     lblCancel.Text := 'X';
@@ -629,6 +645,12 @@ procedure TFrame_Map1.Found_Yoriga_Waggoneri_2(Sender: TObject);
 begin
   if TryFoundItem('Yoriga_Waggoneri_2') then
     ShowMessage('Found Yoriga Waggoneri 2!');
+end;
+
+procedure TFrame_Map1.FramePainting(Sender: TObject; Canvas: TCanvas;
+  const ARect: TRectF);
+begin
+  AdjustGridItemWidth;
 end;
 
 procedure TFrame_Map1.Found_Tribrachidium_Heraldicum_1(
