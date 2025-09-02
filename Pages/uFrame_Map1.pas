@@ -249,8 +249,15 @@ type
     procedure Found_Tribrachidiun_Heraldicum_2(Sender: TObject);
     procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
   private
+    FTotal: Integer;
+    FRemaining: Integer;
+    FFound: TStringList;
+    procedure UpdateCounter;
+    function TryFoundItem(const AKey: string): Boolean;
   protected
+    procedure Loaded; override;
   public
+    destructor Destroy; override;
   end;
 
 implementation
@@ -265,211 +272,320 @@ begin
   TUniPas.RenderPage('MapSelection');
 end;
 
+procedure TFrame_Map1.Loaded;
+begin
+  inherited;
+  FFound := TStringList.Create;
+  FTotal := 40; // total number of logical items
+  FRemaining := FTotal;
+  // keep the title label fixed to "TOTAL"
+  if Assigned(lbl_Title_Counter) then
+    lbl_Title_Counter.Text := 'TOTAL';
+  UpdateCounter;
+  // ensure the cancel label shows the X (restore original)
+  if Assigned(lblCancel) then
+    lblCancel.Text := 'X';
+end;
+
+destructor TFrame_Map1.Destroy;
+begin
+  FFound.Free;
+  inherited;
+end;
+
+procedure TFrame_Map1.UpdateCounter;
+var
+  s: string;
+  comp: TComponent;
+begin
+  s := Format('%d/%d', [FRemaining, FTotal]);
+
+  // Always update the visible counter label if present (shows e.g. "40/40", "39/40"...)
+  if Assigned(lbl_Counter) then
+    lbl_Counter.Text := s;
+
+  // Leave lbl_Title_Counter showing the static title. The live counter is placed
+  // into Components[196] (if present) as requested. Support both TLabel and TText.
+  // Do not overwrite lblCancel; if Components[196] references lblCancel, skip it.
+  if Self.ComponentCount > 196 then
+  begin
+    comp := Self.Components[196];
+    if comp = lblCancel then
+      Exit; // avoid removing the 'X' on the cancel label
+
+    if comp is TLabel then
+      TLabel(comp).Text := s
+    else if comp is TText then
+      TText(comp).Text := s;
+  end;
+end;
+
+function TFrame_Map1.TryFoundItem(const AKey: string): Boolean;
+begin
+  // if already found, return false and do nothing
+  if (AKey <> '') and (FFound.IndexOf(AKey) >= 0) then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // mark found and decrement
+  if AKey <> '' then
+    FFound.Add(AKey);
+
+  if FRemaining > 0 then
+    Dec(FRemaining);
+
+  UpdateCounter;
+  Result := True;
+end;
+
 procedure TFrame_Map1.Found_Auroralumina_attenboroughii_1(Sender: TObject);
 begin
-  ShowMessage('Found Found Auroralumina attenboroughii 1!');
+  if TryFoundItem('Auroralumina_Attenboroughii') then
+    ShowMessage('Found Found Auroralumina attenboroughii 1!');
 end;
 
 procedure TFrame_Map1.Found_Auroralumina_Attenboroughii_2(
   Sender: TObject);
 begin
-  ShowMessage('Found Found Auroralumina attenboroughii 2!');
+  if TryFoundItem('Auroralumina_Attenboroughii') then
+    ShowMessage('Found Found Auroralumina attenboroughii 2!');
 end;
 
 procedure TFrame_Map1.Found_Beothukis_Mistakensis_1(Sender: TObject);
 begin
-  ShowMessage('Found Beothukis Mistakensis 1!');
+  if TryFoundItem('Beothukis_Mistakensis') then
+    ShowMessage('Found Beothukis Mistakensis 1!');
 end;
 
 procedure TFrame_Map1.Found_Beothukis_Mistakensis_2(Sender: TObject);
 begin
-  ShowMessage('Found Beothukis Mistakensis 2!');
+  if TryFoundItem('Beothukis_Mistakensis') then
+    ShowMessage('Found Beothukis Mistakensis 2!');
 end;
 
 procedure TFrame_Map1.Found_Beothukis_Mistakensis_3(Sender: TObject);
 begin
-  ShowMessage('Found Beothukis Mistakensis 3!');
+  if TryFoundItem('Beothukis_Mistakensis') then
+    ShowMessage('Found Beothukis Mistakensis 3!');
 end;
 
 procedure TFrame_Map1.Found_Bradgatia_Lindfordensis_1(Sender: TObject);
 begin
-  ShowMessage('Found Bradgatia Linfordensis 1!');
+  if TryFoundItem('Bradgatia_Linfordensis') then
+    ShowMessage('Found Bradgatia Linfordensis 1!');
 end;
 
 procedure TFrame_Map1.Found_Bradgatia_Lindfordensis_2(Sender: TObject);
 begin
-  ShowMessage('Found Bradgatia Linfordensis 2!');
+  if TryFoundItem('Bradgatia_Linfordensis') then
+    ShowMessage('Found Bradgatia Linfordensis 2!');
 end;
 
 procedure TFrame_Map1.Found_Bradgatia_Lindfordensis_3(Sender: TObject);
 begin
-  ShowMessage('Found Bradgatia Linfordensis 3!');
+  if TryFoundItem('Bradgatia_Linfordensis') then
+    ShowMessage('Found Bradgatia Linfordensis 3!');
 end;
 
 procedure TFrame_Map1.Found_Charnia_Masoni_1(Sender: TObject);
 begin
-  ShowMessage('Found Found Found Charnia Masoni 1!');
+  if TryFoundItem('Charnia_Masoni') then
+    ShowMessage('Found Found Found Charnia Masoni 1!');
 end;
 
 procedure TFrame_Map1.Found_Dickinsonia_Costata_1(Sender: TObject);
 begin
-  ShowMessage('Found Dickinsonia Costata 1!');
+  if TryFoundItem('Dickinsonia_Costata') then
+    ShowMessage('Found Dickinsonia Costata 1!');
 end;
 
 procedure TFrame_Map1.Found_Dickinsonia_Costata_2(Sender: TObject);
 begin
-  ShowMessage('Found Dickinsonia Costata 2!');
+  if TryFoundItem('Dickinsonia_Costata') then
+    ShowMessage('Found Dickinsonia Costata 2!');
 end;
 
 procedure TFrame_Map1.Found_Fractofusus_Misrai_1(Sender: TObject);
 begin
-  ShowMessage('Found Fractofusus Misrai 1!');
+  if TryFoundItem('Fractofusus_Misrai') then
+    ShowMessage('Found Fractofusus Misrai 1!');
 end;
 
 procedure TFrame_Map1.Found_Fractofusus_Misrai_2(Sender: TObject);
 begin
-  ShowMessage('Found Fractofusus Misrai 2!');
+  if TryFoundItem('Fractofusus_Misrai') then
+    ShowMessage('Found Fractofusus Misrai 2!');
 end;
 
 procedure TFrame_Map1.Found_Fractofusus_Misrai_3(Sender: TObject);
 begin
-  ShowMessage('Found Fractofusus Misrai 3!');
+  if TryFoundItem('Fractofusus_Misrai') then
+    ShowMessage('Found Fractofusus Misrai 3!');
 end;
 
 procedure TFrame_Map1.Found_Fractofusus_Misrai_4(Sender: TObject);
 begin
-  ShowMessage('Found Fractofusus Misrai 4!');
+  if TryFoundItem('Fractofusus_Misrai') then
+    ShowMessage('Found Fractofusus Misrai 4!');
 end;
 
 procedure TFrame_Map1.Found_Kimberella_Quadrata_1(Sender: TObject);
 begin
-  ShowMessage('Found Kimberella Quadrata 1!');
+  if TryFoundItem('Kimberella_Quadrata') then
+    ShowMessage('Found Kimberella Quadrata 1!');
 end;
 
 procedure TFrame_Map1.Found_Kimberella_Quadrata_2(Sender: TObject);
 begin
-  ShowMessage('Found Kimberella Quadrata 2!');
+  if TryFoundItem('Kimberella_Quadrata') then
+    ShowMessage('Found Kimberella Quadrata 2!');
 end;
 
 procedure TFrame_Map1.Found_Kimberella_Quadrata_3(Sender: TObject);
 begin
-  ShowMessage('Found Kimberella Quadrata 3!');
+  if TryFoundItem('Kimberella_Quadrata') then
+    ShowMessage('Found Kimberella Quadrata 3!');
 end;
 
 procedure TFrame_Map1.Found_Metaspriggina_1(Sender: TObject);
 begin
-  ShowMessage('Found Metaspriggina 1!');
+  if TryFoundItem('Metaspriggina') then
+    ShowMessage('Found Metaspriggina 1!');
 end;
 
 procedure TFrame_Map1.Found_Metaspriggina_2(Sender: TObject);
 begin
-  ShowMessage('Found Metaspriggina 2!');
+  if TryFoundItem('Metaspriggina') then
+    ShowMessage('Found Metaspriggina 2!');
 end;
 
 procedure TFrame_Map1.Found_Metaspriggina_3(Sender: TObject);
 begin
-  ShowMessage('Found Metaspriggina 3!');
+  if TryFoundItem('Metaspriggina') then
+    ShowMessage('Found Metaspriggina 3!');
 end;
 
 procedure TFrame_Map1.Found_Metaspringa(Sender: TObject);
 begin
-  ShowMessage('Found Metaspringa 1!');
+  if TryFoundItem('Metaspriggina') then
+    ShowMessage('Found Metaspringa 1!');
 end;
 
 procedure TFrame_Map1.Found_Metaspringa_1(Sender: TObject);
 begin
-  ShowMessage('Found Metaspring 1!');
+  if TryFoundItem('Metaspriggina') then
+    ShowMessage('Found Metaspring 1!');
 end;
 
 procedure TFrame_Map1.Found_Pteridinium_1(Sender: TObject);
 begin
-  ShowMessage('Found Pteridinium 1!');
+  if TryFoundItem('Pteridinium') then
+    ShowMessage('Found Pteridinium 1!');
 end;
 
 procedure TFrame_Map1.Found_Pteridinium_2(Sender: TObject);
 begin
-  ShowMessage('Found Pteridinium 2!');
+  if TryFoundItem('Pteridinium') then
+    ShowMessage('Found Pteridinium 2!');
 end;
 
 procedure TFrame_Map1.Found_Pteridinium_3(Sender: TObject);
 begin
-  ShowMessage('Found Pteridinium 3!');
+  if TryFoundItem('Pteridinium') then
+    ShowMessage('Found Pteridinium 3!');
 end;
 
 procedure TFrame_Map1.Found_Rangea_Schneiderhoeni_1(Sender: TObject);
 begin
-  ShowMessage('Found Rangea Schneiderhoeni 1!');
+  if TryFoundItem('Rangea_Schneiderhoehni') then
+    ShowMessage('Found Rangea Schneiderhoeni 1!');
 end;
 
 procedure TFrame_Map1.Found_Rangea_Schneiderhoeni_2(Sender: TObject);
 begin
- ShowMessage('Found Rangea Schneiderhoeni 2!');
+ if TryFoundItem('Rangea_Schneiderhoehni') then
+  ShowMessage('Found Rangea Schneiderhoeni 2!');
 end;
 
 procedure TFrame_Map1.Found_Rangea_Schneiderhoeni_3(Sender: TObject);
 begin
- ShowMessage('Found Rangea Schneiderhoeni 3!');
+ if TryFoundItem('Rangea_Schneiderhoehni') then
+  ShowMessage('Found Rangea Schneiderhoeni 3!');
 end;
 
 procedure TFrame_Map1.Found_Spriggina_Floundersi_1(Sender: TObject);
 begin
-  ShowMessage('Found Found Spriggina Floundersi 1!');
+  if TryFoundItem('Spriggina_Floundersi') then
+    ShowMessage('Found Found Spriggina Floundersi 1!');
 end;
 
 procedure TFrame_Map1.Found_Spriggina_Floundersi_2(Sender: TObject);
 begin
-  ShowMessage('Found Found Spriggina Floundersi 2!');
+  if TryFoundItem('Spriggina_Floundersi') then
+    ShowMessage('Found Found Spriggina Floundersi 2!');
 end;
 
 procedure TFrame_Map1.Found_Spriggina_Floundersi_3(Sender: TObject);
 begin
-  ShowMessage('Found Found Spriggina Floundersi 3!');
+  if TryFoundItem('Spriggina_Floundersi') then
+    ShowMessage('Found Found Spriggina Floundersi 3!');
 end;
 
 procedure TFrame_Map1.Found_Thectadris_Avalonensis_1(Sender: TObject);
 begin
-  ShowMessage('Found Thectadris Avalonensis 1!');
+  if TryFoundItem('Thectadris_Avalonensis') then
+    ShowMessage('Found Thectadris Avalonensis 1!');
 end;
 
 procedure TFrame_Map1.Found_Thectadris_Avalonensis_2(Sender: TObject);
 begin
-  ShowMessage('Found Thectadris Avalonensis 2!');
+  if TryFoundItem('Thectadris_Avalonensis') then
+    ShowMessage('Found Thectadris Avalonensis 2!');
 end;
 
 procedure TFrame_Map1.Found_Thectadris_Avalonensis_3(Sender: TObject);
 begin
-  ShowMessage('Found Thectadris Avalonensis 3!');
+  if TryFoundItem('Thectadris_Avalonensis') then
+    ShowMessage('Found Thectadris Avalonensis 3!');
 end;
 
 procedure TFrame_Map1.Found_Thectadris_Avalonensis_4(Sender: TObject);
 begin
-  ShowMessage('Found Thectadris Avalonensis 4!');
+  if TryFoundItem('Thectadris_Avalonensis') then
+    ShowMessage('Found Thectadris Avalonensis 4!');
 end;
 
 procedure TFrame_Map1.Found_Tribrachidiun_Heraldicum_2(Sender: TObject);
 begin
-  ShowMessage('Found Tribrachidiun Heraldicum 2!');
+  if TryFoundItem('Tribrachidium_Heraldicum') then
+    ShowMessage('Found Tribrachidiun Heraldicum 2!');
 end;
 
 procedure TFrame_Map1.Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
 begin
-  ShowMessage('Found Tribrachidiun Heraldicum 3!');
+  if TryFoundItem('Tribrachidium_Heraldicum') then
+    ShowMessage('Found Tribrachidiun Heraldicum 3!');
 end;
 
 procedure TFrame_Map1.Found_Yoriga_Waggoneri_1(Sender: TObject);
 begin
-  ShowMessage('Found Yoriga Waggoneri 1!');
+  if TryFoundItem('Yoriga_Waggoneri') then
+    ShowMessage('Found Yoriga Waggoneri 1!');
 end;
 
 procedure TFrame_Map1.Found_Yoriga_Waggoneri_2(Sender: TObject);
 begin
-  ShowMessage('Found Yoriga Waggoneri 2!');
+  if TryFoundItem('Yoriga_Waggoneri') then
+    ShowMessage('Found Yoriga Waggoneri 2!');
 end;
 
 procedure TFrame_Map1.Found_Tribrachidium_Heraldicum_1(
   Sender: TObject);
 begin
-  ShowMessage('Found Tribrachidiun Heraldicum 1!');
+  if TryFoundItem('Tribrachidium_Heraldicum') then
+    ShowMessage('Found Tribrachidiun Heraldicum 1!');
 end;
 
 end.
