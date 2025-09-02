@@ -42,30 +42,11 @@ begin
   // Load config and apply fullscreen/windowed mode at startup
   LoadConfig(cfg);
   try
-    if cfg.Fullscreen then
-    begin
-      try
-        Self.FullScreen := True;
-        Self.WindowState := TWindowState.wsMaximized;
-      except
-        // ignore platform-specific failures
-      end;
-    end
-    else
-    begin
-      try
-        Self.FullScreen := False;
-        Self.WindowState := TWindowState.wsNormal;
-        // ensure decorations are applied on some platforms
-        try
-          Self.Visible := False;
-          Self.Visible := True;
-        except
-          // ignore
-        end;
-      except
-        // ignore
-      end;
+    // Apply only the FullScreen flag; do not use nested procedures
+    try
+      Self.FullScreen := cfg.Fullscreen;
+    except
+      // ignore platform-specific failures
     end;
   except
     // swallow errors to avoid startup crash

@@ -121,52 +121,12 @@ begin
   begin
     Application.MainForm.FullScreen := cfg.Fullscreen;
 
-    // Ensure that when leaving fullscreen we restore a normal, decorated window
-    if not cfg.Fullscreen then
-    begin
-      try
-        // Request a normal window state which helps restore decorations on many platforms
-        Application.MainForm.WindowState := TWindowState.wsNormal;
-        Application.MainForm.BringToFront;
-
-        // Some window managers require a quick hide/show to re-evaluate window decorations
-        try
-          Application.MainForm.Visible := False;
-          Application.MainForm.Visible := True;
-        except
-          // ignore
-        end;
-
-        // On some platforms toggling FormStyle/Form borders helps force the native window
-        // manager to re-apply decorations; wrap in platform guards to avoid cross-platform issues
-        {$IFDEF MSWINDOWS}
-        try
-          Application.MainForm.FormStyle := TFormStyle.Normal;
-        except
-          // ignore failures
-        end;
-        {$ENDIF}
-
-        {$IFDEF LINUX}
-        try
-          Application.MainForm.FormStyle := TFormStyle.Normal;
-        except
-          // ignore failures
-        end;
-        {$ENDIF}
-      except
-        // swallow any exceptions to avoid crashing the app when platform-specific
-        // changes are not supported
-      end;
-    end
-    else
-    begin
-      // When entering fullscreen, ensure the form is maximized for visual consistency
-      try
-        Application.MainForm.WindowState := TWindowState.wsMaximized;
-      except
-        // ignore
-      end;
+    // Only toggle the FullScreen flag. Do not change WindowState, FormStyle or
+    // perform hide/show tricks — those were causing platform-specific issues.
+    try
+      Application.MainForm.BringToFront;
+    except
+      // ignore
     end;
   end;
 
