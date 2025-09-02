@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation;
+  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox;
 
 type
   TFrame_Map1 = class(TFrame)
@@ -174,88 +174,85 @@ type
     LayMapCHI_Yorgia_Waggoneri_2_6: TEllipse;
     LayMapCHI_Metaspriggina_3_3: TEllipse;
     LayMapCHI_Metaspriggina_3_4: TEllipse;
-    img_Auroralumina_Attenboroughii: TImage;
-    img_Bradgatia_Linfordensis: TImage;
-    img_Charnia_Masoni: TImage;
-    img_Dickinsonia_Costata: TImage;
-    img_Fractofusus_Misrai: TImage;
-    img_Kimberella_Quadrata: TImage;
-    img_Metaspriggina: TImage;
-    img_Pteridinium: TImage;
-    img_Rangea_Schneiderhoehni: TImage;
-    img_Spriggina_floundersi: TImage;
-    img_Thectardis_avalonensis: TImage;
-    img_Tribrachidium_heraldicum: TImage;
-    img_Yorgia_Waggoneri: TImage;
     LayMapCHI_Bradgatia_Linfordensis_3_4: TEllipse;
-    img_Beothukis_Mistakensis: TImage;
-    Text_Beothukis_Mistakensis: TText;
-    Text_Bradgatia_Linfordensis: TText;
-    Text_Pteridinium: TText;
-    Text_Thectardis_Avalonensis: TText;
-    Text_Spriggina_Floundersi: TText;
-    Text_Yorgia_Waggoneri: TText;
-    Text_Auroralumina_Attenboroughii: TText;
-    Text_Tribrachidiu_Heraldicum: TText;
-    Text_Kimberella_Quadrata: TText;
-    Text_Rangea_Schneiderhoehni: TText;
-    Text_Fractofusus_Misrai: TText;
-    Text_Dickinsonia_Costata: TText;
-    Text_Metaspriggina: TText;
-    Text_Charnia_Masoni: TText;
     LayMapCHI_Charnia_Masoni_1_2: TEllipse;
     lbl_Title_Counter: TLabel;
     lbl_Counter: TLabel;
-    procedure btnCancelClick(Sender: TObject);
-    procedure Found_Auroralumina_attenboroughii_1(Sender: TObject);
-    procedure Found_Auroralumina_Attenboroughii_2(Sender: TObject);
-    procedure Found_Beothukis_Mistakensis_1(Sender: TObject);
-    procedure Found_Beothukis_Mistakensis_2(Sender: TObject);
-    procedure Found_Beothukis_Mistakensis_3(Sender: TObject);
-    procedure Found_Bradgatia_Lindfordensis_1(Sender: TObject);
-    procedure Found_Bradgatia_Lindfordensis_2(Sender: TObject);
-    procedure Found_Bradgatia_Lindfordensis_3(Sender: TObject);
-    procedure Found_Spriggina_Floundersi_1(Sender: TObject);
-    procedure Found_Spriggina_Floundersi_2(Sender: TObject);
-    procedure Found_Spriggina_Floundersi_3(Sender: TObject);
-    procedure Found_Charnia_Masoni_1(Sender: TObject);
-    procedure Found_Dickinsonia_Costata_1(Sender: TObject);
-    procedure Found_Dickinsonia_Costata_2(Sender: TObject);
-    procedure Found_Fractofusus_Misrai_1(Sender: TObject);
-    procedure Found_Fractofusus_Misrai_2(Sender: TObject);
-    procedure Found_Fractofusus_Misrai_3(Sender: TObject);
-    procedure Found_Fractofusus_Misrai_4(Sender: TObject);
-    procedure Found_Kimberella_Quadrata_1(Sender: TObject);
-    procedure Found_Kimberella_Quadrata_2(Sender: TObject);
-    procedure Found_Kimberella_Quadrata_3(Sender: TObject);
-    procedure Found_Metaspringa(Sender: TObject);
-    procedure Found_Metaspringa_1(Sender: TObject);
-    procedure Found_Metaspriggina_1(Sender: TObject);
-    procedure Found_Metaspriggina_2(Sender: TObject);
-    procedure Found_Metaspriggina_3(Sender: TObject);
-    procedure Found_Pteridinium_1(Sender: TObject);
-    procedure Found_Pteridinium_2(Sender: TObject);
-    procedure Found_Pteridinium_3(Sender: TObject);
-    procedure Found_Rangea_Schneiderhoeni_1(Sender: TObject);
-    procedure Found_Rangea_Schneiderhoeni_2(Sender: TObject);
-    procedure Found_Rangea_Schneiderhoeni_3(Sender: TObject);
-    procedure Found_Thectadris_Avalonensis_2(Sender: TObject);
-    procedure Found_Thectadris_Avalonensis_3(Sender: TObject);
-    procedure Found_Thectadris_Avalonensis_1(Sender: TObject);
-    procedure Found_Thectadris_Avalonensis_4(Sender: TObject);
-    procedure Found_Yoriga_Waggoneri_2(Sender: TObject);
-    procedure Found_Yoriga_Waggoneri_1(Sender: TObject);
-    procedure Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
-    procedure Found_Tribrachidiun_Heraldicum_2(Sender: TObject);
-    procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
+    VertScrollBox1: TVertScrollBox;
+    GridLayout1: TGridLayout;
+    Layout1: TLayout;
+    img_Beothukis_Mistakensis: TImage;
+    Text_Beothukis_Mistakensis: TText;
+    Layout2: TLayout;
+    img_Bradgatia_Linfordensis: TImage;
+    Text_Bradgatia_Linfordensis: TText;
+    Layout3: TLayout;
+    Layout4: TLayout;
+    img_Pteridinium: TImage;
+    img_Thectardis_avalonensis: TImage;
+    Text_Pteridinium: TText;
+    Text_Thectardis_Avalonensis: TText;
+    Layout5: TLayout;
+    img_Yorgia_Waggoneri: TImage;
+    Layout6: TLayout;
+    img_Spriggina_floundersi: TImage;
+    Layout7: TLayout;
+    Layout8: TLayout;
+    img_Kimberella_Quadrata: TImage;
+    img_Tribrachidium_heraldicum: TImage;
+    Layout9: TLayout;
+    Layout10: TLayout;
+    img_Auroralumina_Attenboroughii: TImage;
+    img_Rangea_Schneiderhoehni: TImage;
+    Text_Kimberella_Quadrata: TText;
+    Text_Tribrachidiu_Heraldicum: TText;
+    Text_Spriggina_Floundersi: TText;
+    Text_Yorgia_Waggoneri: TText;
+    Text_Rangea_Schneiderhoehni: TText;
+    Text_Auroralumina_Attenboroughii: TText;
+    Layout11: TLayout;
+    Layout12: TLayout;
+    img_Fractofusus_Misrai: TImage;
+    img_Dickinsonia_Costata: TImage;
+    Text_Fractofusus_Misrai: TText;
+    Text_Dickinsonia_Costata: TText;
+    Layout13: TLayout;
+    Layout14: TLayout;
+    img_Metaspriggina: TImage;
+    img_Charnia_Masoni: TImage;
+    Text_Metaspriggina: TText;
+    Text_Charnia_Masoni: TText;
+    procedure btnCancelClick(Sender: TObject); procedure Found_Auroralumina_attenboroughii_1(Sender: TObject);
+    procedure Found_Auroralumina_Attenboroughii_2(Sender: TObject); procedure Found_Beothukis_Mistakensis_1(Sender: TObject);
+    procedure Found_Beothukis_Mistakensis_2(Sender: TObject); procedure Found_Beothukis_Mistakensis_3(Sender: TObject);
+    procedure Found_Bradgatia_Lindfordensis_1(Sender: TObject); procedure Found_Bradgatia_Lindfordensis_2(Sender: TObject);
+    procedure Found_Bradgatia_Lindfordensis_3(Sender: TObject); procedure Found_Spriggina_Floundersi_1(Sender: TObject);
+    procedure Found_Spriggina_Floundersi_2(Sender: TObject); procedure Found_Spriggina_Floundersi_3(Sender: TObject);
+    procedure Found_Charnia_Masoni_1(Sender: TObject); procedure Found_Dickinsonia_Costata_1(Sender: TObject);
+    procedure Found_Dickinsonia_Costata_2(Sender: TObject); procedure Found_Fractofusus_Misrai_1(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_2(Sender: TObject); procedure Found_Fractofusus_Misrai_3(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_4(Sender: TObject); procedure Found_Kimberella_Quadrata_1(Sender: TObject);
+    procedure Found_Kimberella_Quadrata_2(Sender: TObject); procedure Found_Kimberella_Quadrata_3(Sender: TObject);
+    procedure Found_Metaspringa(Sender: TObject); procedure Found_Metaspringa_1(Sender: TObject);
+    procedure Found_Metaspriggina_1(Sender: TObject); procedure Found_Metaspriggina_2(Sender: TObject);
+    procedure Found_Metaspriggina_3(Sender: TObject); procedure Found_Pteridinium_1(Sender: TObject);
+    procedure Found_Pteridinium_2(Sender: TObject); procedure Found_Pteridinium_3(Sender: TObject);
+    procedure Found_Rangea_Schneiderhoeni_1(Sender: TObject); procedure Found_Rangea_Schneiderhoeni_2(Sender: TObject);
+    procedure Found_Rangea_Schneiderhoeni_3(Sender: TObject); procedure Found_Thectadris_Avalonensis_2(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_3(Sender: TObject); procedure Found_Thectadris_Avalonensis_1(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_4(Sender: TObject); procedure Found_Yoriga_Waggoneri_2(Sender: TObject);
+    procedure Found_Yoriga_Waggoneri_1(Sender: TObject); procedure Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
+    procedure Found_Tribrachidiun_Heraldicum_2(Sender: TObject); procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
   private
     FTotal: Integer;
     FRemaining: Integer;
     FFound: TStringList;
     procedure UpdateCounter;
+    procedure AdjustGridItemWidth;
     function TryFoundItem(const AKey: string): Boolean;
   protected
     procedure Loaded; override;
+    procedure Resize; override;
   public
     destructor Destroy; override;
   end;
@@ -282,9 +279,51 @@ begin
   if Assigned(lbl_Title_Counter) then
     lbl_Title_Counter.Text := 'TOTAL';
   UpdateCounter;
+  // ensure grid items size appropriately for two columns
+  AdjustGridItemWidth;
   // ensure the cancel label shows the X (restore original)
   if Assigned(lblCancel) then
     lblCancel.Text := 'X';
+end;
+
+procedure TFrame_Map1.Resize;
+begin
+  inherited;
+  // Recalculate grid item width whenever the frame resizes
+  AdjustGridItemWidth;
+end;
+
+procedure TFrame_Map1.AdjustGridItemWidth;
+var
+  availWidth, scrollbarWidth, targetWidth: Single;
+begin
+  if not Assigned(GridLayout1) then
+    Exit;
+
+  // Prefer the parent control width when available (cast to TControl).
+  if Assigned(GridLayout1.Parent) and (GridLayout1.Parent is TControl) then
+    availWidth := TControl(GridLayout1.Parent).Width
+  else
+    availWidth := GridLayout1.Width;
+
+  if availWidth <= 0 then
+    availWidth := GridLayout1.Width;
+
+  scrollbarWidth := 0;
+  // Determine whether a vertical scrollbar is likely present by comparing content
+  // height with the viewport height. Some FMX versions do not publish VertScrollBar
+  // so avoid referencing it directly.
+  if Assigned(VertScrollBox1) then
+  begin
+    if Assigned(VertScrollBox1.Content) and (VertScrollBox1.Content.Height > VertScrollBox1.Height) then
+      scrollbarWidth := 16; // approximate scrollbar width; adjust if needed
+  end;
+
+  targetWidth := (availWidth - scrollbarWidth) / 2;
+  if targetWidth < 1 then
+    targetWidth := 1;
+
+  GridLayout1.ItemWidth := targetWidth;
 end;
 
 destructor TFrame_Map1.Destroy;
