@@ -11,13 +11,13 @@ type
   TFrame_Map2 = class(TFrame)
     Rectangle1: TRectangle;
     imgMap: TImage;
-    layMapCHI_Monitor1: TLayout;
-    layMapCHI_Monitor2: TLayout;
-    layMapCHI_Monitor3: TLayout;
-    layMapCHI_Laptop2: TLayout;
-    layMapCHI_Laptop1: TLayout;
-    layMapCHI_Laptop3: TLayout;
-    layMapCHI_Laptop4: TLayout;
+    layMapHitbox_Monitor1: TLayout;
+    layMapHitbox_Monitor2: TLayout;
+    layMapHitbox_Monitor3: TLayout;
+    layMapHitbox_Laptop2: TLayout;
+    layMapHitbox_Laptop1: TLayout;
+    layMapHitbox_Laptop3: TLayout;
+    layMapHitbox_Laptop4: TLayout;
     Layout1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;

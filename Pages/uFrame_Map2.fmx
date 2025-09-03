@@ -104336,7 +104336,7 @@ object Frame_Map2: TFrame_Map2
       Size.Width = 621.000000000000000000
       Size.Height = 412.000000000000000000
       Size.PlatformDefault = False
-      object layMapCHI_Laptop1: TLayout
+      object layMapHitbox_Laptop1: TLayout
         HitTest = True
         Position.X = 306.000000000000000000
         Position.Y = 250.000000000000000000
@@ -104346,7 +104346,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = Laptop_Found
       end
-      object layMapCHI_Laptop2: TLayout
+      object layMapHitbox_Laptop2: TLayout
         HitTest = True
         Position.X = 302.000000000000000000
         Position.Y = 276.000000000000000000
@@ -104356,7 +104356,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = Laptop_Found
       end
-      object layMapCHI_Laptop3: TLayout
+      object layMapHitbox_Laptop3: TLayout
         HitTest = True
         Position.X = 361.000000000000000000
         Position.Y = 253.000000000000000000
@@ -104366,7 +104366,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = Laptop_Found
       end
-      object layMapCHI_Laptop4: TLayout
+      object layMapHitbox_Laptop4: TLayout
         HitTest = True
         Position.X = 342.000000000000000000
         Position.Y = 208.000000000000000000
@@ -104376,7 +104376,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = Laptop_Found
       end
-      object layMapCHI_Monitor1: TLayout
+      object layMapHitbox_Monitor1: TLayout
         HitTest = True
         Position.X = 128.000000000000000000
         Position.Y = 152.000000000000000000
@@ -104385,7 +104385,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = TV_Screen_Found
       end
-      object layMapCHI_Monitor2: TLayout
+      object layMapHitbox_Monitor2: TLayout
         HitTest = True
         Position.X = 142.000000000000000000
         Position.Y = 172.000000000000000000
@@ -104394,7 +104394,7 @@ object Frame_Map2: TFrame_Map2
         Size.PlatformDefault = False
         OnClick = TV_Screen_Found
       end
-      object layMapCHI_Monitor3: TLayout
+      object layMapHitbox_Monitor3: TLayout
         HitTest = True
         Position.X = 129.000000000000000000
         Position.Y = 197.000000000000000000
