@@ -10,7 +10,6 @@ uses
 
 type
   TFrame_Map1 = class(TFrame)
-    Lay_Map1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;
     Rect_Map1: TRectangle;
@@ -274,7 +273,7 @@ type
     Line_Yorgia_Waggoneri_3: TLine;
     procedure btnCancelClick(Sender: TObject);
     procedure Found_Auroralumina_attenboroughii_3(Sender: TObject);
-    procedure Found_Auroralumina_Attenboroughii_1_2(Sender: TObject);
+    procedure Found_Auroralumina_Attenboroughii_1(Sender: TObject); overload;
     procedure Found_Beothukis_Mistakensis_1(Sender: TObject);
     procedure Found_Beothukis_Mistakensis_2(Sender: TObject);
     procedure Found_Beothukis_Mistakensis_3(Sender: TObject);
@@ -314,8 +313,7 @@ type
     procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
     procedure FramePainting(Sender: TObject; Canvas: TCanvas;
       const ARect: TRectF);
-    procedure Found_Auroralumina_Attenboroughii_1(Sender: TObject);
-    procedure Found_Yorgia_Waggoneri_3(Sender: TObject);
+    procedure Found_Yuria_Waggoneri_3(Sender: TObject);
     procedure Found_Thectardis_Avalonensis_1(Sender: TObject);
   private
     FTotal: Integer;
@@ -334,6 +332,7 @@ type
 implementation
 
 uses
+  Ian.Styling.Buttons,
   UniPas.Routing; // use routing to show map selection
 
 {$R *.fmx}
@@ -370,6 +369,11 @@ begin
       if Assigned(VertScrollBox1) then
         VertScrollBox1.Repaint;
     end);
+
+  // Apply the Ian button styling to the cancel button on this map frame
+  if Assigned(btnCancel) and Assigned(lblCancel) then
+    ApplyButtonStyle(btnCancel, lblCancel, True);
+
   // ensure the cancel label shows the X (restore original)
   if Assigned(lblCancel) then
     lblCancel.Text := 'X';
