@@ -274,6 +274,7 @@ type
     procedure btnCancelClick(Sender: TObject);
     procedure Found_Auroralumina_attenboroughii_3(Sender: TObject);
     procedure Found_Auroralumina_Attenboroughii_1(Sender: TObject); overload;
+    procedure Found_Auroralumina_Attenboroughii_1_2(Sender: TObject);
     procedure Found_Beothukis_Mistakensis_1(Sender: TObject);
     procedure Found_Beothukis_Mistakensis_2(Sender: TObject);
     procedure Found_Beothukis_Mistakensis_3(Sender: TObject);
@@ -308,12 +309,12 @@ type
     procedure Found_Thectadris_Avalonensis_4(Sender: TObject);
     procedure Found_Yorgia_Waggoneri_2(Sender: TObject);
     procedure Found_Yorgia_Waggoneri_1(Sender: TObject);
+    procedure Found_Yorgia_Waggoneri_3(Sender: TObject);
     procedure Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
     procedure Found_Tribrachidium_Heraldicum_2(Sender: TObject);
     procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
     procedure FramePainting(Sender: TObject; Canvas: TCanvas;
       const ARect: TRectF);
-    procedure Found_Yuria_Waggoneri_3(Sender: TObject);
     procedure Found_Thectardis_Avalonensis_1(Sender: TObject);
   private
     FTotal: Integer;
