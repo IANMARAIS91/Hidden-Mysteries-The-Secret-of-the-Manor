@@ -1,46 +1,64 @@
 object popupSelectMap: TpopupSelectMap
-  Size.Width = 735.000000000000000000
-  Size.Height = 571.000000000000000000
+  Size.Width = 429.000000000000000000
+  Size.Height = 337.000000000000000000
   Size.PlatformDefault = False
-  object laySelectMap: TRectangle
-    Position.X = 240.000000000000000000
-    Position.Y = 252.000000000000000000
+  object layDialog: TRectangle
+    Align = Center
     RotationCenter.X = 0.000000000000000000
     RotationCenter.Y = 0.000000000000000000
-    Size.Width = 225.000000000000000000
-    Size.Height = 101.000000000000000000
+    Size.Width = 239.000000000000000000
+    Size.Height = 132.000000000000000000
     Size.PlatformDefault = False
     XRadius = 7.000000000000000000
     YRadius = 7.000000000000000000
-    object Message: TText
-      Position.X = 8.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Width = 209.000000000000000000
+    object lblMessage: TText
+      Align = Top
+      Size.Width = 239.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       Text = 'Please Select a Map First.'
     end
-    object btnOK: TRectangle
-      Cursor = crHandPoint
-      Position.X = 52.000000000000000000
-      Position.Y = 60.000000000000000000
-      Size.Width = 120.000000000000000000
-      Size.Height = 40.000000000000000000
+    object layButtonContainer: TLayout
+      Align = Bottom
+      Margins.Bottom = 15.000000000000000000
+      Position.Y = 61.000000000000000000
+      Size.Width = 239.000000000000000000
+      Size.Height = 56.000000000000000000
       Size.PlatformDefault = False
-      Stroke.Color = x7FB4A082
-      XRadius = 7.000000000000000000
-      YRadius = 7.000000000000000000
-      Fill.Color = x990A0A0A
-      object lblOK: TLabel
-        Align = Client
-        StyledSettings = [Family]
-        Size.Width = 120.000000000000000000
-        Size.Height = 40.000000000000000000
+      TabOrder = 1
+      object layButtonCenterContainer: TLayout
+        Align = HorzCenter
+        Position.X = 35.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
-        TextSettings.Font.Size = 18.000000000000000000
-        TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Center
-        Text = 'OK'
+        TabOrder = 0
+        object btnOk: TRectangle
+          Align = Left
+          Cursor = crHandPoint
+          Fill.Color = x990A0A0A
+          Margins.Left = 12.000000000000000000
+          Position.X = 12.000000000000000000
+          Size.Width = 144.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = x7FB4A082
+          XRadius = 7.000000000000000000
+          YRadius = 7.000000000000000000
+          object lblOk: TLabel
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 144.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'OK'
+            TabOrder = 0
+          end
+        end
       end
     end
   end

@@ -23,7 +23,8 @@ uses
   uFrame_Map6 in 'Pages\uFrame_Map6.pas' {Frame_Map6: TFrame},
   uFrame_MapSelection in 'Pages\uFrame_MapSelection.pas' {Frame_MapSelection: TFrame},
   uFrame_Options in 'Pages\uFrame_Options.pas' {Frame_Options: TFrame},
-  uBootstrapIcons in 'Lib\Delphi-Bootstrap-Icons\uBootstrapIcons.pas';
+  uBootstrapIcons in 'Lib\Delphi-Bootstrap-Icons\uBootstrapIcons.pas',
+  popMap1Complete in 'Dialogs\popMap1Complete.pas' {popupMap1Complete: TFrame};
 
 {$R *.res}
 

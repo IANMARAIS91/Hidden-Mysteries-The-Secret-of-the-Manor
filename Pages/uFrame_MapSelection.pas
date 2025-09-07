@@ -98,8 +98,6 @@ begin
 end;
 
 procedure TFrame_MapSelection.btnSelectClick(Sender: TObject);
-var
-  Popup: TpopupSelectMap;
 begin
   // Ensure a map is selected
   if FSelectedIdx < 0 then
@@ -107,7 +105,7 @@ begin
     // Show custom popup instead of generic message
     if Assigned(Parent) and (Parent is TControl) then
     begin
-      Popup := TpopupSelectMap.Create(nil);
+      var Popup := TpopupSelectMap.Create(nil);
       Popup.ShowOn(TControl(Parent));
     end
     else

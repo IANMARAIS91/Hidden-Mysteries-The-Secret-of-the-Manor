@@ -1,5 +1,65 @@
-object Frame1: TpopupMap1Complete
-  Size.Width = 320.000000000000000000
-  Size.Height = 240.000000000000000000
+object popupMap1Complete: TpopupMap1Complete
+  Size.Width = 534.000000000000000000
+  Size.Height = 289.000000000000000000
   Size.PlatformDefault = False
+  object layDialog: TRectangle
+    Align = Center
+    RotationCenter.X = 0.000000000000000000
+    RotationCenter.Y = 0.000000000000000000
+    Size.Width = 239.000000000000000000
+    Size.Height = 132.000000000000000000
+    Size.PlatformDefault = False
+    XRadius = 7.000000000000000000
+    YRadius = 7.000000000000000000
+    object lblMessage: TText
+      Align = Top
+      Size.Width = 239.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Map1 Complete!'
+    end
+    object layButtonContainer: TLayout
+      Align = Bottom
+      Margins.Bottom = 15.000000000000000000
+      Position.Y = 61.000000000000000000
+      Size.Width = 239.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object layButtonCenterContainer: TLayout
+        Align = HorzCenter
+        Position.X = 35.000000000000000000
+        Size.Width = 168.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnOk: TRectangle
+          Align = Left
+          Cursor = crHandPoint
+          Fill.Color = x990A0A0A
+          Margins.Left = 12.000000000000000000
+          Position.X = 12.000000000000000000
+          Size.Width = 144.000000000000000000
+          Size.Height = 56.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = x7FB4A082
+          XRadius = 7.000000000000000000
+          YRadius = 7.000000000000000000
+          object lblOk: TLabel
+            Align = Client
+            Cursor = crHandPoint
+            StyledSettings = [Family]
+            Size.Width = 144.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'OK'
+            TabOrder = 0
+          end
+        end
+      end
+    end
+  end
 end

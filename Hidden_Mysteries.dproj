@@ -366,6 +366,11 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="Lib\Delphi-Bootstrap-Icons\uBootstrapIcons.pas"/>
+        <DCCReference Include="Dialogs\popMap1Complete.pas">
+            <Form>popupMap1Complete</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

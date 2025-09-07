@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox;
+  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox,
+  popMap1Complete; // add here so TFrame1 can be used in interface
 
 type
   TFrame_Map1 = class(TFrame)
@@ -438,19 +439,10 @@ begin
   if Assigned(lbl_Counter) then
     lbl_Counter.Text := s;
 
-  // Leave lbl_Title_Counter showing the static title. The live counter is placed
-  // into Components[196] (if present) as requested. Support both TLabel and TText.
-  // Do not overwrite lblCancel; if Components[196] references lblCancel, skip it.
-  if Self.ComponentCount > 196 then
+  if FRemaining = 0 then
   begin
-    comp := Self.Components[196];
-    if comp = lblCancel then
-      Exit; // avoid removing the 'X' on the cancel label
-
-    if comp is TLabel then
-      TLabel(comp).Text := s
-    else if comp is TText then
-      TText(comp).Text := s;
+    var Popup := TpopupMap1Complete.Create(nil);
+    Popup.ShowOn(TControl(Parent));
   end;
 end;
 

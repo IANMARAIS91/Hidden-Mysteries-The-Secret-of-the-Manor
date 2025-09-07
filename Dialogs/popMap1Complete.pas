@@ -3,65 +3,53 @@ unit popMap1Complete;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Controls.Presentation;
+  FMX.Controls.Presentation, FMX.Objects, FMX.Layouts;
 
 type
   TpopupMap1Complete = class(TFrame)
-    laySelectMap: TRectangle;
-    Message: TText;
-    btnOK: TRectangle;
-    lblOK: TLabel;
-  private
-    { visual-only: no behaviors }
-  public
-    procedure StyleOKAsMenuButton; // apply styles only
-    procedure ShowOn(AParent: TControl); // display centered on parent
+    layDialog: TRectangle;
+    lblMessage: TText;
+    layButtonContainer: TLayout;
+    layButtonCenterContainer: TLayout;
+    btnOk: TRectangle;
+    lblOk: TLabel;
     procedure btnOKClick(Sender: TObject);
+  private
+    procedure StyleOKAsMenuButton;
+  public
+    procedure ShowOn(AParent: TControl);
   end;
 
 implementation
 
 uses
-  Ian.Styling.Buttons; // styling helper (no behavioral code here)
+  Ian.Styling.Buttons,
+  UniPas.Routing;
 
 {$R *.fmx}
 
-procedure TpopupMap1Complete.StyleOKAsMenuButton;
-var
-  targetW, targetH, paddingBottom: Single;
-begin
-  if not Assigned(btnOK) or not Assigned(laySelectMap) then
-    Exit;
-  laySelectMap.ClipChildren := True;
-  targetW := 120;
-  targetH := 48;
-  paddingBottom := 12;
-  if targetW > laySelectMap.Width - 16 then
-    targetW := laySelectMap.Width - 16;
-  if targetW < 60 then
-    targetW := 60;
-  if targetH > laySelectMap.Height - 32 then
-    targetH := laySelectMap.Height - 32;
-  if targetH < 36 then
-    targetH := 36;
-  btnOK.Width := targetW;
-  btnOK.Height := targetH;
-  btnOK.Position.X := (laySelectMap.Width - btnOK.Width) / 2;
-  btnOK.Position.Y := laySelectMap.Height - btnOK.Height - paddingBottom;
-  if btnOK.Position.Y < (Message.Position.Y + Message.Height + 4) then
-    btnOK.Position.Y := Message.Position.Y + Message.Height + 4;
-  if Assigned(lblOK) then
-    ApplyButtonStyle(btnOK, lblOK, True);
-  lblOK.Text := 'OK';
-  // Intentionally do not wire any OnClick or ShowOn behavior — visual only
-end;
-
 procedure TpopupMap1Complete.btnOKClick(Sender: TObject);
 begin
+  TUniPas.RenderPage('MapSelection');
   Parent := nil;
   Free;
+end;
+
+procedure TpopupMap1Complete.StyleOKAsMenuButton;
+begin
+  var targetW: Single := 120; // standard width similar to other menu buttons (can shrink later)
+  var targetH: Single := 48;
+  var paddingBottom: Single := 12;
+  if targetW > layDialog.Width - 16 then targetW := layDialog.Width - 16;
+  if targetW < 60 then targetW := 60;
+  if targetH > layDialog.Height - 32 then targetH := layDialog.Height - 32;
+  if targetH < 36 then targetH := 36;
+  // Apply unified styling/colors & hover effects
+  if Assigned(lblOK) then
+    ApplyButtonStyle(btnOK, lblOK, True);
+  btnOK.OnClick := btnOKClick;
 end;
 
 procedure TpopupMap1Complete.ShowOn(AParent: TControl);
@@ -71,15 +59,7 @@ begin
   Align := TAlignLayout.Contents;
   Width := AParent.Width;
   Height := AParent.Height;
-  // apply sizing and styles
   StyleOKAsMenuButton;
-  // set the message text for Map 1 completion
-  if Assigned(Message) then
-    Message.Text := 'Map 1 Complete!';
-  // ensure OK closes the popup
-  if Assigned(btnOK) then
-    btnOK.OnClick := btnOKClick;
-  // center dialog if needed (FMX layout ensures contents align)
   Visible := True;
 end;
 
