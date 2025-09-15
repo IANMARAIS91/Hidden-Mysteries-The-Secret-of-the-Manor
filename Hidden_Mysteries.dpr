@@ -24,7 +24,8 @@ uses
   uFrame_MapSelection in 'Pages\uFrame_MapSelection.pas' {Frame_MapSelection: TFrame},
   uFrame_Options in 'Pages\uFrame_Options.pas' {Frame_Options: TFrame},
   uBootstrapIcons in 'Lib\Delphi-Bootstrap-Icons\uBootstrapIcons.pas',
-  popMap1Complete in 'Dialogs\popMap1Complete.pas' {popupMap1Complete: TFrame};
+  popMap1Complete in 'Dialogs\popMap1Complete.pas' {popupMap1Complete: TFrame},
+  popMap2Complete in 'Dialogs\popMap2Complete.pas' {popupMap2Complete: TFrame};
 
 {$R *.res}
 

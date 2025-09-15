@@ -3,55 +3,745 @@ unit uFrame_Map2;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Controls.Presentation, FMX.Layouts;
+  FMX.Layouts, FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox,
+  popMap2Complete; // add here so TFrame1 can be used in interface
 
 type
   TFrame_Map2 = class(TFrame)
-    Rectangle1: TRectangle;
-    imgMap: TImage;
-    layMapHitbox_Monitor1: TLayout;
-    layMapHitbox_Monitor2: TLayout;
-    layMapHitbox_Monitor3: TLayout;
-    layMapHitbox_Laptop2: TLayout;
-    layMapHitbox_Laptop1: TLayout;
-    layMapHitbox_Laptop3: TLayout;
-    layMapHitbox_Laptop4: TLayout;
-    Layout1: TLayout;
     btnCancel: TRectangle;
     lblCancel: TLabel;
-    Rectangle2: TRectangle;
+    Rect_Map2: TRectangle;
+    Rect_Item_Reference_Box: TRectangle;
+    img_Map2: TImage;
+    lbl_Title_Counter: TLabel;
+    lbl_Counter: TLabel;
+    VertScrollBox1: TVertScrollBox;
+    GridLayout1: TGridLayout;
+    Layout1: TLayout;
+    img_Symbrachiata: TImage;
+    Text_Amplectobelua_Symbrachiata: TText;
+    Layout2: TLayout;
+    img_Bradgatia_Linfordensis: TImage;
+    Text_Bradgatia_Linfordensis: TText;
+    Layout3: TLayout;
+    Layout4: TLayout;
+    img_Pteridinium: TImage;
+    img_Thectardis_avalonensis: TImage;
+    Text_Pteridinium: TText;
+    Text_Thectardis_Avalonensis: TText;
+    Layout5: TLayout;
+    img_Yorgia_Waggoneri: TImage;
+    Layout6: TLayout;
+    img_Spriggina_floundersi: TImage;
+    Layout7: TLayout;
+    Layout8: TLayout;
+    img_Kimberella_Quadrata: TImage;
+    img_Tribrachidium_heraldicum: TImage;
+    Layout9: TLayout;
+    Layout10: TLayout;
+    img_Auroralumina_Attenboroughii: TImage;
+    img_Rangea_Schneiderhoehni: TImage;
+    Text_Kimberella_Quadrata: TText;
+    Text_Tribrachidiu_Heraldicum: TText;
+    Text_Spriggina_Floundersi: TText;
+    Text_Yorgia_Waggoneri: TText;
+    Text_Rangea_Schneiderhoehni: TText;
+    Text_Auroralumina_Attenboroughii: TText;
+    Layout11: TLayout;
+    Layout12: TLayout;
+    img_Fractofusus_Misrai: TImage;
+    img_Dickinsonia_Costata: TImage;
+    Text_Fractofusus_Misrai: TText;
+    Text_Dickinsonia_Costata: TText;
+    Layout13: TLayout;
+    Layout14: TLayout;
+    img_Metaspriggina: TImage;
+    Text_Metaspriggina: TText;
+    Text_Charnia_Masoni: TText;
+    img_Item_Reference_Box_Background: TImage;
+    Layout15: TLayout;
+    img_Charnia_Masoni: TImage;
     ScaledLayout1: TScaledLayout;
+    layMapHitbox_Auroralumina_Attenboroughii_1_1: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_2: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_3: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_4: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_5: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_6: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_7: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_8: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_1_9: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_1: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_2: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_3: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_4: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_5: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_6: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_2_7: TEllipse;
+    layMapHitbox_Beothukis_Mistakensis_1: TEllipse;
+    layMapHitbox_Beothukis_Mistakensis_2: TEllipse;
+    layMapHitbox_Beothukis_Mistakensis_3: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_1_1: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_1_2: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_1_3: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_1: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_2: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_3: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_4: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_5: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_6: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_2_7: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_3_1: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_3_2: TEllipse;
+    layMapHitbox_Bradgatia_Linfordensis_3_3: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_1: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_8: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_9: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_10: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_11: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_3: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_4: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_5: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_6: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_7: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_3_1: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_3_2: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_3_4: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_3_3: TEllipse;
+    layMapHitbox_Dickinsonia_Costata_1_1: TEllipse;
+    layMapHitbox_Dickinsonia_Costata_1_2: TEllipse;
+    layMapHitbox_Dickinsonia_Costata_2: TEllipse;
+    layMapHitbox_Fractofusus_Misrai_1: TEllipse;
+    layMapHitbox_Fractofusus_Misrai_2: TEllipse;
+    layMapHitbox_Fractofusus_Misrai_3: TEllipse;
+    layMapHitbox_Fractofusus_Misrai_4: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_1_1: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_1_2: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_1_3: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_1_4: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_2_1: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_2_2: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_2_3: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_2_4: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_3_1: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_3_2: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_3_3: TEllipse;
+    layMapHitbox_Kimberella_Quadrata_3_4: TEllipse;
+    layMapHitbox_Metaspriggina_1_1: TEllipse;
+    layMapHitbox_Metaspriggina_1_2: TEllipse;
+    layMapHitbox_Metaspriggina_1_3: TEllipse;
+    layMapHitbox_Metaspriggina_2_1: TEllipse;
+    layMapHitbox_Metaspriggina_2_2: TEllipse;
+    layMapHitbox_Metaspriggina_2_3: TEllipse;
+    layMapHitbox_Metaspriggina_2_4: TEllipse;
+    layMapHitbox_Metaspriggina_2_5: TEllipse;
+    layMapHitbox_Metaspriggina_2_6: TEllipse;
+    layMapHitbox_Metaspriggina_2_7: TEllipse;
+    layMapHitbox_Metaspriggina_2_8: TEllipse;
+    layMapHitbox_Metaspriggina_2_9: TEllipse;
+    layMapHitbox_Metaspriggina_3_1: TEllipse;
+    layMapHitbox_Metaspriggina_3_2: TEllipse;
+    layMapHitbox_Pteridinium_1: TEllipse;
+    layMapHitbox_Pteridinium_2_1: TEllipse;
+    layMapHitbox_Pteridinium_2_2: TEllipse;
+    layMapHitbox_Pteridinium_3: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_1: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_2: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_3: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_4: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_5: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_6: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_7: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_8: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_1_9: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_1: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_10: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_2: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_3: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_4: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_5: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_6: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_7: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_8: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_2_9: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_1: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_10: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_2: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_3: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_4: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_5: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_6: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_7: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_8: TEllipse;
+    layMapHitbox_Rangea_Schneiderhoehni_3_9: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_1_1: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_1_2: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_1_3: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_2_1: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_2_2: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_2_3: TEllipse;
+    layMapHitbox_Spriggina_Floundersi_2_4: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_1: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_2: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_3: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_4: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_5: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_6: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_2_7: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_3_1: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_3_2: TEllipse;
+    layMapHitbox_Thectadris_Avalonensis_3_3: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_1_1: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_1_2: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_1_3: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_1_4: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_1: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_2: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_3: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_4: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_5: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_6: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_7: TEllipse;
+    layMapHitbox_Thectardis_Avalonensis_4_8: TEllipse;
+    layMapHitbox_Tribrachidium_Heraldicum_1: TEllipse;
+    layMapHitbox_Tribrachidium_Heraldicum_2: TEllipse;
+    layMapHitbox_Tribrachidium_Heraldicum_3: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_3_1: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_1_2: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_1_3: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_1_4: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_1_5: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_1_1: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_1: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_2: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_3: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_4: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_5: TEllipse;
+    layMapHitbox_Yorgia_Waggoneri_2_6: TEllipse;
+    layMapHitbox_Metaspriggina_3_3: TEllipse;
+    layMapHitbox_Metaspriggina_3_4: TEllipse;
+    layMapHitbox_Bradgatia_Lindfordensis_3_4: TEllipse;
+    layMapHitbox_Charnia_Masoni_1_2: TEllipse;
+    Line_Metaspriggina_3: TLine;
+    Line_Rangea_Schneiderhoehni_3: TLine;
+    Line_Bradgatia_Linfordensis_3: TLine;
+    Line_Fractofusus_Misrai_1: TLine;
+    Line_Tribrachidium_Heraldicum_1: TLine;
+    Line_Dickinsonia_Costata_1: TLine;
+    Line_Thectadris_Avalonensis_3: TLine;
+    Line_Beothukis_Mistakensis_1: TLine;
+    Line_Tribrachidium_Heraldicum_2: TLine;
+    Line_Kimberella_Quadrata_1: TLine;
+    Line_Spriggina_Floundersi_1: TLine;
+    Line_Auroralumina_Attenboroughii_2: TLine;
+    layMapHitbox_Auroralumina_Attenboroughii_3_1: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_3_2: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_3_3: TEllipse;
+    layMapHitbox_Auroralumina_Attenboroughii_3_4: TEllipse;
+    Line_Thectadris_Avalonensis_2: TLine;
+    Line_Beothukis_Mistakensis_3: TLine;
+    Line_Spriggina_Floundersi_2: TLine;
+    Line_Fractofusus_Misrai_2: TLine;
+    Line_Bradgatia_Linfordensis_2: TLine;
+    Line_Auroralumina_Attenboroughii_3: TLine;
+    Line_Kimberella_Quadrata_3: TLine;
+    Line_Charnia_Masoni_1: TLine;
+    Line_Tribrachidium_Heraldicum_3: TLine;
+    Line_Metaspriggina_2: TLine;
+    Line_Beothukis_Mistakensis_2: TLine;
+    Line_Yorgia_Waggoneri_1: TLine;
+    Line_Spriggina_Floundersi_3: TLine;
+    Line_Pteridinium_1: TLine;
+    Line_Waggoneri_1: TLine;
+    Line_Metaspriggina_1: TLine;
+    Line_Bradgatia_Linfordensis_1: TLine;
+    Line_Pteridinium_2: TLine;
+    Line_Kimberella_Quadrata_2: TLine;
+    Line_Thectardis_Avalonensis_1: TLine;
+    Line_Fractofusus_Misrai_4: TLine;
+    Line_Dickinsonia_Costata_2: TLine;
+    Line_Rangea_Schneiderhoehni_1: TLine;
+    Line_Thectardis_Avalonensis_4: TLine;
+    Line_Fractofusus_Misrai_3: TLine;
+    Line_Pteridinium_3: TLine;
+    Line_Auroralumina_Attenboroughii_1: TLine;
+    Line_Rangea_Schneiderhoehni_2: TLine;
+    Line_Yorgia_Waggoneri_2: TLine;
+    layMapHitbox_Bradgatia_Linfordensis_3_4: TEllipse;
+    Line_Yorgia_Waggoneri_3: TLine;
+    Rect_Amplectobelua_Symbrachiata_1: TRectangle;
+    img_Amplectobelua_Symbrachiata_1: TImage;
+    Rect_Amplectobelua_Symbrachiata_2: TRectangle;
+    img_Amplectobelua_Symbrachiata_2: TImage;
+    Rect_Amplectobelua_Symbrachiata_3: TRectangle;
+    img_Amplectobelua_Symbrachiata_3: TImage;
+    Rect_Amplectobelua_Symbrachiata_4: TRectangle;
     procedure btnCancelClick(Sender: TObject);
-    procedure Laptop_Found(Sender: TObject);
-    procedure TV_Screen_Found(Sender: TObject);
+    procedure Found_Auroralumina_attenboroughii_3(Sender: TObject);
+    procedure Found_Auroralumina_Attenboroughii_1(Sender: TObject); overload;
+    procedure Found_Auroralumina_Attenboroughii_1_2(Sender: TObject);
+    procedure Found_Beothukis_Mistakensis_1(Sender: TObject);
+    procedure Found_Beothukis_Mistakensis_2(Sender: TObject);
+    procedure Found_Beothukis_Mistakensis_3(Sender: TObject);
+    procedure Found_Bradgatia_Linfordensis_1(Sender: TObject);
+    procedure Found_Bradgatia_Linfordensis_2(Sender: TObject);
+    procedure Found_Bradgatia_Linfordensis_3(Sender: TObject);
+    procedure Found_Spriggina_Floundersi_1(Sender: TObject);
+    procedure Found_Spriggina_Floundersi_2(Sender: TObject);
+    procedure Found_Spriggina_Floundersi_3(Sender: TObject);
+    procedure Found_Charnia_Masoni_1(Sender: TObject);
+    procedure Found_Dickinsonia_Costata_1(Sender: TObject);
+    procedure Found_Dickinsonia_Costata_2(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_1(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_2(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_3(Sender: TObject);
+    procedure Found_Fractofusus_Misrai_4(Sender: TObject);
+    procedure Found_Kimberella_Quadrata_1(Sender: TObject);
+    procedure Found_Kimberella_Quadrata_2(Sender: TObject);
+    procedure Found_Kimberella_Quadrata_3(Sender: TObject);
+    procedure Found_Metaspriggina_1(Sender: TObject);
+    procedure Found_Metaspriggina_2(Sender: TObject);
+    procedure Found_Metaspriggina_3(Sender: TObject);
+    procedure Found_Pteridinium_1(Sender: TObject);
+    procedure Found_Pteridinium_2(Sender: TObject);
+    procedure Found_Pteridinium_3(Sender: TObject);
+    procedure Found_Rangea_Schneiderhoeni_1(Sender: TObject);
+    procedure Found_Rangea_Schneiderhoeni_2(Sender: TObject);
+    procedure Found_Rangea_Schneiderhoeni_3(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_2(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_3(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_1(Sender: TObject);
+    procedure Found_Thectadris_Avalonensis_4(Sender: TObject);
+    procedure Found_Yorgia_Waggoneri_2(Sender: TObject);
+    procedure Found_Yorgia_Waggoneri_1(Sender: TObject);
+    procedure Found_Yorgia_Waggoneri_3(Sender: TObject);
+    procedure Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
+    procedure Found_Tribrachidium_Heraldicum_2(Sender: TObject);
+    procedure Found_Tribrachidium_Heraldicum_1(Sender: TObject);
+    procedure FramePainting(Sender: TObject; Canvas: TCanvas;
+      const ARect: TRectF);
+    procedure Found_Thectardis_Avalonensis_1(Sender: TObject);
   private
-    { Private declarations }
+    FTotal: Integer;
+    FRemaining: Integer;
+    FFound: TStringList;
+    procedure UpdateCounter;
+    procedure AdjustGridItemWidth;
+    function TryFoundItem(const AKey: string): Boolean;
+  protected
+    procedure Loaded; override;
+    procedure Resize; override;
   public
-    { Public declarations }
+    destructor Destroy; override;
   end;
 
 implementation
 
 uses
-   UniPas.Routing;
+  Ian.Styling.Buttons,
+  UniPas.Routing; // use routing to show map selection
 
 {$R *.fmx}
 
 procedure TFrame_Map2.btnCancelClick(Sender: TObject);
 begin
-    TUniPas.RenderPage('MapSelection');
+  TUniPas.RenderPage('MapSelection');
 end;
 
-procedure TFrame_Map2.Laptop_Found(Sender: TObject);
+procedure TFrame_Map2.Loaded;
 begin
-    ShowMessage('Laptop Found!');
+  inherited;
+  FFound := TStringList.Create;
+  FTotal := 41; // total number of logical items
+  FRemaining := FTotal;
+  // keep the title label fixed to "TOTAL"
+  if Assigned(lbl_Title_Counter) then
+    lbl_Title_Counter.Text := 'TOTAL';
+  UpdateCounter;
+  // ensure grid items size appropriately for two columns
+  // Defer the actual adjustment to the main queue so the parent/control sizes are finalized
+  TThread.Queue(nil,
+    procedure
+    begin
+      AdjustGridItemWidth;
+      // force redraw so the GridLayout items take the new widths immediately
+      if Assigned(GridLayout1) then
+      begin
+        GridLayout1.Repaint;
+        if Assigned(GridLayout1.Parent) and (GridLayout1.Parent is TControl)
+        then
+          TControl(GridLayout1.Parent).Repaint;
+      end;
+      if Assigned(VertScrollBox1) then
+        VertScrollBox1.Repaint;
+    end);
+
+  // Apply the Ian button styling to the cancel button on this map frame
+  if Assigned(btnCancel) and Assigned(lblCancel) then
+    ApplyButtonStyle(btnCancel, lblCancel, True);
+
+  // ensure the cancel label shows the X (restore original)
+  if Assigned(lblCancel) then
+    lblCancel.Text := 'X';
 end;
 
-procedure TFrame_Map2.TV_Screen_Found(Sender: TObject);
+procedure TFrame_Map2.Resize;
 begin
-    ShowMessage('TV Screen Found!');
+  inherited;
+  // Recalculate grid item width whenever the frame resizes
+  AdjustGridItemWidth;
+end;
+
+procedure TFrame_Map2.AdjustGridItemWidth;
+var
+  availWidth, scrollbarWidth, targetWidth: Single;
+begin
+  if not Assigned(GridLayout1) then
+    Exit;
+
+  // Prefer the parent control width when available (cast to TControl).
+  if Assigned(GridLayout1.Parent) and (GridLayout1.Parent is TControl) then
+    availWidth := TControl(GridLayout1.Parent).Width
+  else
+    availWidth := GridLayout1.Width;
+
+  if availWidth <= 0 then
+    availWidth := GridLayout1.Width;
+
+  scrollbarWidth := 0;
+  // Determine whether a vertical scrollbar is likely present by comparing content
+  // height with the viewport height. Some FMX versions do not publish VertScrollBar
+  // so avoid referencing it directly.
+  if Assigned(VertScrollBox1) then
+  begin
+    if Assigned(VertScrollBox1.Content) and
+      (VertScrollBox1.Content.Height > VertScrollBox1.Height) then
+      scrollbarWidth := 16; // approximate scrollbar width; adjust if needed
+  end;
+
+  targetWidth := (availWidth - scrollbarWidth) / 2;
+  if targetWidth < 1 then
+    targetWidth := 1;
+
+  GridLayout1.ItemWidth := targetWidth;
+end;
+
+destructor TFrame_Map2.Destroy;
+begin
+  FFound.Free;
+  inherited;
+end;
+
+procedure TFrame_Map2.UpdateCounter;
+var
+  s: string;
+  comp: TComponent;
+begin
+  s := Format('%d/%d', [FRemaining, FTotal]);
+
+  // Always update the visible counter label if present (shows e.g. "40/40", "39/40"...)
+  if Assigned(lbl_Counter) then
+    lbl_Counter.Text := s;
+
+  if FRemaining = 0 then
+  begin
+    var Popup := TpopupMap2Complete.Create(nil);
+    Popup.ShowOn(TControl(Parent));
+  end;
+end;
+
+function TFrame_Map2.TryFoundItem(const AKey: string): Boolean;
+var
+  key: string;
+begin
+  // normalize key and ignore empty keys
+  key := Trim(AKey);
+  if key = '' then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  key := LowerCase(key);
+
+  // if already found, return false and do nothing
+  if FFound.IndexOf(key) >= 0 then
+  begin
+    Result := False;
+    Exit;
+  end;
+
+  // mark found and decrement
+  FFound.Add(key);
+
+  if FRemaining > 0 then
+    Dec(FRemaining);
+
+  UpdateCounter;
+  Result := True;
+end;
+
+procedure TFrame_Map2.Found_Auroralumina_attenboroughii_3(Sender: TObject);
+begin
+  if TryFoundItem('Auroralumina_Attenboroughii_3') then
+    Line_Auroralumina_Attenboroughii_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Auroralumina_Attenboroughii_1(Sender: TObject);
+begin
+  if TryFoundItem('Auroralumina_Attenboroughii_1') then
+    Line_Auroralumina_Attenboroughii_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Auroralumina_Attenboroughii_1_2(Sender: TObject);
+begin
+  if TryFoundItem('Auroralumina_Attenboroughii_2') then
+    Line_Auroralumina_Attenboroughii_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Beothukis_Mistakensis_1(Sender: TObject);
+begin
+  if TryFoundItem('Beothukis_Mistakensis_1') then
+    Line_Beothukis_Mistakensis_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Beothukis_Mistakensis_2(Sender: TObject);
+begin
+  if TryFoundItem('Beothukis_Mistakensis_2') then
+    Line_Beothukis_Mistakensis_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Beothukis_Mistakensis_3(Sender: TObject);
+begin
+  if TryFoundItem('Found_Beothukis_Mistakensis_3') then
+    Line_Beothukis_Mistakensis_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Bradgatia_Linfordensis_1(Sender: TObject);
+begin
+  if TryFoundItem('Bradgatia_Linfordensis_1') then
+    Line_Bradgatia_Linfordensis_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Bradgatia_Linfordensis_2(Sender: TObject);
+begin
+  if TryFoundItem('Bradgatia_linfordensis_2') then
+    Line_Bradgatia_Linfordensis_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Bradgatia_Linfordensis_3(Sender: TObject);
+begin
+  if TryFoundItem('Bradgatia_Linfordensis_3') then
+    Line_Bradgatia_Linfordensis_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Spriggina_Floundersi_1(Sender: TObject);
+begin
+  if TryFoundItem('Spriggina_Floundersi_1') then
+    Line_Spriggina_Floundersi_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Spriggina_Floundersi_2(Sender: TObject);
+begin
+  if TryFoundItem('Spriggina_Floundersi_2') then
+    Line_Spriggina_Floundersi_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Spriggina_Floundersi_3(Sender: TObject);
+begin
+  if TryFoundItem('Spriggina_Floundersi_3') then
+    Line_Spriggina_Floundersi_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Charnia_Masoni_1(Sender: TObject);
+begin
+  if TryFoundItem('Charnia_Masoni_1') then
+    Line_Charnia_Masoni_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Dickinsonia_Costata_1(Sender: TObject);
+begin
+  if TryFoundItem('Dickinsonia_Costata_1') then
+    Line_Dickinsonia_Costata_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Dickinsonia_Costata_2(Sender: TObject);
+begin
+  if TryFoundItem('Dickinsonia_Costata_2') then
+    Line_Dickinsonia_Costata_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Fractofusus_Misrai_1(Sender: TObject);
+begin
+  if TryFoundItem('Fractofusus_Misrai_1') then
+    Line_Fractofusus_Misrai_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Fractofusus_Misrai_2(Sender: TObject);
+begin
+  if TryFoundItem('Fractofusus_Misrai_2') then
+    Line_Fractofusus_Misrai_2.Visible := True;
+
+end;
+
+procedure TFrame_Map2.Found_Fractofusus_Misrai_3(Sender: TObject);
+begin
+  if TryFoundItem('Fractofusus_Misrai_3') then
+    Line_Fractofusus_Misrai_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Fractofusus_Misrai_4(Sender: TObject);
+begin
+  if TryFoundItem('Fractofusus_Misrai_4') then
+    Line_Fractofusus_Misrai_4.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Kimberella_Quadrata_1(Sender: TObject);
+begin
+  if TryFoundItem('Kimberella_Quadrata_1') then
+    Line_Kimberella_Quadrata_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Kimberella_Quadrata_2(Sender: TObject);
+begin
+  if TryFoundItem('Kimberella_Quadrata_2') then
+    Line_Kimberella_Quadrata_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Kimberella_Quadrata_3(Sender: TObject);
+begin
+  if TryFoundItem('Kimberella_Quadrata_3') then
+    Line_Kimberella_Quadrata_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Metaspriggina_1(Sender: TObject);
+begin
+  if TryFoundItem('Metaspriggina_1') then
+    Line_Metaspriggina_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Metaspriggina_2(Sender: TObject);
+begin
+  if TryFoundItem('Metaspriggina_2') then
+    Line_Metaspriggina_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Metaspriggina_3(Sender: TObject);
+begin
+  if TryFoundItem('Metaspriggina_3') then
+    Line_Metaspriggina_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Pteridinium_1(Sender: TObject);
+begin
+  if TryFoundItem('Pteridinium_1') then
+    Line_Pteridinium_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Pteridinium_2(Sender: TObject);
+begin
+  if TryFoundItem('Pteridinium_2') then
+    Line_Pteridinium_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Pteridinium_3(Sender: TObject);
+begin
+  if TryFoundItem('Pteridinium_3') then
+    Line_Pteridinium_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Rangea_Schneiderhoeni_1(Sender: TObject);
+begin
+  if TryFoundItem('Rangea_Schneiderhoehni_1') then
+    Line_Rangea_Schneiderhoehni_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Rangea_Schneiderhoeni_2(Sender: TObject);
+begin
+  if TryFoundItem('Rangea_Schneiderhoehni_2') then
+    Line_Rangea_Schneiderhoehni_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Rangea_Schneiderhoeni_3(Sender: TObject);
+begin
+  if TryFoundItem('Rangea_Schneiderhoehni_3') then
+    Line_Rangea_Schneiderhoehni_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Thectadris_Avalonensis_1(Sender: TObject);
+begin
+  if TryFoundItem('Thectardis_Avalonensis_1') then
+    Line_Thectardis_Avalonensis_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Thectadris_Avalonensis_2(Sender: TObject);
+begin
+  if TryFoundItem('Found_Thectadris_Avalonensis_2') then
+    Line_Thectadris_Avalonensis_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Thectadris_Avalonensis_3(Sender: TObject);
+begin
+  if TryFoundItem('Thectadris_Avalonensis_3') then
+    Line_Thectadris_Avalonensis_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Thectadris_Avalonensis_4(Sender: TObject);
+begin
+  if TryFoundItem('Thectadris_Avalonensis_4') then
+    Line_Thectardis_Avalonensis_4.Visible := True;
+
+end;
+
+procedure TFrame_Map2.Found_Thectardis_Avalonensis_1(Sender: TObject);
+begin
+  if TryFoundItem('Thectardis_Avalonensis_1') then
+    Line_Thectardis_Avalonensis_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Tribrachidium_Heraldicum_2(Sender: TObject);
+begin
+  if TryFoundItem('Tribrachidium_Heraldicum_2') then
+    Line_Tribrachidium_Heraldicum_2.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Tribrachidiun_Heraldicum_3(Sender: TObject);
+begin
+  if TryFoundItem('Tribrachidium_Heraldicum_3') then
+    Line_Tribrachidium_Heraldicum_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Yorgia_Waggoneri_1(Sender: TObject);
+begin
+  if TryFoundItem('Yorgia_Waggoneri_1') then
+    Line_Yorgia_Waggoneri_1.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Yorgia_Waggoneri_3(Sender: TObject);
+begin
+  if TryFoundItem('Yorgia_Waggoneri_3') then
+    Line_Yorgia_Waggoneri_3.Visible := True;
+end;
+
+procedure TFrame_Map2.Found_Yorgia_Waggoneri_2(Sender: TObject);
+begin
+  if TryFoundItem('Yoriga_Waggoneri_2') then
+    Line_Yorgia_Waggoneri_2.Visible := True;
+end;
+
+procedure TFrame_Map2.FramePainting(Sender: TObject; Canvas: TCanvas;
+const ARect: TRectF);
+begin
+  AdjustGridItemWidth;
+end;
+
+procedure TFrame_Map2.Found_Tribrachidium_Heraldicum_1(Sender: TObject);
+begin
+  if TryFoundItem('Tribrachidium_Heraldicum_1') then
+    Line_Tribrachidium_Heraldicum_1.Visible := True;
 end;
 
 end.
